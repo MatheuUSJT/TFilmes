@@ -35,6 +35,7 @@ const getPais = (callback) => {
     );
 }
 
+
 const total = (callback) => {
     const conexao = obterConexao();
     conexao.query(
@@ -49,22 +50,11 @@ const inserir = (filme, callback) => {
     const conexao = obterConexao();
     conexao.execute(
         'INSERT INTO filme(titulo,origem_uf,sinopse,genero,data_lancamento) VALUES (?,?,?,?,?)',
-        [filme.titulo, filme.origem_uf, filme.sinopse, filme.genero, filme.data_lancamento],
+        [filme.titulo, filme.paisSelecionado, filme.sinopse, filme.genero, filme.data_lancamento],
         (erro, resultado) =>{
             callback(resultado);
         }
     );
-}
-
-const getNomePais = (filme, callback) =>{
-    const conexao = obterConexao();
-    conexao.execute(
-        'SELECT pais FROM paises WHERE = ?',
-        [filme.origem_uf],
-        (erro, resultado) =>{
-            callback(resultado);
-        }
-    )
 }
 
 const atualizar = (filme, callback) =>{
@@ -95,6 +85,5 @@ module.exports = {
     atualizar,
     excluir, 
     total,
-    getPais,
-    getNomePais
+    getPais
 }

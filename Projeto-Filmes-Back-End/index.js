@@ -22,11 +22,11 @@ const obterFilmes = (req, res) =>{
 }
 
 const obterPaises = (req, res) => {
-    db.getPais((pais)=>{
-        pais = pais.map((p)=>{
+    db.getPais((paises)=>{
+        paises = paises.map((p)=>{
             return{codigo: p.codigo, sigla: p.sigla, pais: p.pais}
         });
-        res.json({pais});
+        res.json({paises});
     });
 }
 
@@ -39,7 +39,7 @@ const obterPaises = (req, res) => {
     })
 }*/
 
-app.get("/tarefas/paises", (req, res) => {
+app.get("/paises", (req, res) => {
     obterPaises(req, res);
 })
 

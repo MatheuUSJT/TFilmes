@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Filme } from '../model/filme';
+import { Pais } from '../model/pais';
 import { FilmeService } from './filme.service';
 
 @Component({
@@ -12,12 +13,27 @@ export class FilmeComponent implements OnInit {
   constructor(private filmeService: FilmeService) { }
 
   filmes: Filme[] = [];
+  paises: Pais[] = [];
+  paisSelecionado: number = 0;
 
   ngOnInit(){
+    //get Filmes
     this.filmeService.getColecaoAtualizada().subscribe(filmes =>{
       this.filmes = filmes;
     });
     this.filmeService.list();
+
+    //get Paises
+    this.filmeService.returnPaises().subscribe(paises =>{
+      this.paises= paises;
+    });
+    this.filmeService.getPaises();
+
+
+  }
+
+  postConsole(p: Pais){
+    console.log(p);
 
   }
 
@@ -46,6 +62,7 @@ export class FilmeComponent implements OnInit {
       genero: filmeForm.value.genero,
       }
 
+      console.log(f);
     //this.tarefas.push(t);
     this.filmeService.add(f);
     //this.total = this.total + tarefaForm.value.valor;

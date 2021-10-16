@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Subject} from 'rxjs';
 import { Filme } from '../model/filme';
+import { Pais } from '../model/pais';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Filme } from '../model/filme';
 export class FilmeService {
   private baseUrl: string = 'http://localhost:3000/filmes';
   private colecaofilmes = new Subject<Filme[]>();
+  private colecaoPaises = new Subject<Pais[]>();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,6 +19,16 @@ export class FilmeService {
   public getColecaoAtualizada(){
     return this.colecaofilmes.asObservable();
   };
+
+  public returnPaises(){
+    return this.colecaoPaises.asObservable();
+  }
+
+  public getPaises(){
+    this.httpClient.get<{paises: Pais[]}>('http://localhost:3000/paises').subscribe(resultado => {
+      this.colecaoPaises.next(resultado.paises);
+    });
+  }
 
   public list (){
     this.httpClient.get<{filmes: Filme[]}>(this.baseUrl).subscribe(resultado =>{
