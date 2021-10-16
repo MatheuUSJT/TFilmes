@@ -1,0 +1,83 @@
+
+<main>
+  <p-tabView>
+    <p-tabPanel header="Cadastro">
+      <p-card header="Filmes">
+
+        <form #filmeForm="ngForm" (ngSubmit)="adicionar(filmeForm)">
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="titulo" ngModel>
+            <label for="float-input-tarefa">Titulo</label>
+          </span>
+
+          <span class="p-float-label">
+            <input type="date" id="float-input-tarefa" pInputText name="data_lancamento" ngModel>
+            <!--<label for="float-input-tarefa">Data de Lancamento</label>-->
+          </span>
+
+          <span class="p-float-label">
+            <input type="number" id="float-input-tarefa" pInputText name="origem_uf" ngModel>
+            <label for="float-input-tarefa">Origem UF</label>
+          </span>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="sinopse" ngModel>
+            <label for="float-input-tarefa">Sinopse</label>
+          </span>
+
+          <span class="p-float-label">
+            <input type="number" id="float-input-tarefa" pInputText name="genero" ngModel>
+            <label for="float-input-tarefa">Genero</label>
+          </span>
+
+          <br>
+          <div class="container text-center">
+            <img [src]="url"  height="200"><br>
+            <input type="file" (change)="onselectFile($event)">
+          </div>
+          <br>
+
+
+          <br>
+          <div class="adicionar-botao">
+            <p-button label="Adicionar" type="submit" icon="pi pi-check"></p-button>
+          </div>
+        </form>
+      </p-card>
+    </p-tabPanel>
+
+
+
+
+    <!--EXIBIÇÃO DE FILMES-->
+    <p-tabPanel header="Movie's View">
+
+
+      <div class="FILMES" *ngFor="let filme of filmes">
+        <p-card header="{{filme.titulo}}">
+          <!--<img [src]="'assets/img/velozes_e_furiosos.jpg'" style="width:300px; height: 500px;" alt="image">-->
+
+          <div class="info-filmes">
+            <span> {{filme.data_lancamento}} </span><br>
+            <span> {{filme.pais_origem}} </span><br>
+            <span> {{filme.show_genero}} </span><br>
+            <span> {{filme.sinopse}} </span><br>
+
+            <!--Arrumar Imagem por filme-->
+            <!--<img style="height:200px; width:150px;" [src]="'assets/img/velozes_e_furiosos.jpg'">-->
+
+          </div>
+
+          <!--Botão para excluir Filme-->
+          <ng-template pTemplate="footer">
+            <p-button class="btn-excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
+          </ng-template>
+        </p-card>
+
+      </div><!--Close Let Filmes-->
+
+    </p-tabPanel>
+
+
+</p-tabView>
+</main>
