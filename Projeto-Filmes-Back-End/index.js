@@ -30,14 +30,18 @@ const obterPaises = (req, res) => {
     });
 }
 
-/*const obterTotal = (req, res) => {
-    db.total((listaTotal) => {
-        listaTotal = listaTotal.map((t) =>{
-            return {valor: t.valor}
+const obterGeneros = (req, res) => {
+    db.getGenero((generos)=>{
+        generos = generos.map((g)=>{
+            return{codigo: g.codigo, descricao: g.descricao}
         });
-        res.json({listaTotal});
-    })
-}*/
+        res.json({generos});
+    });
+}
+
+app.get("/generos", (req, res) => {
+    obterGeneros(req, res);
+});
 
 app.get("/paises", (req, res) => {
     obterPaises(req, res);

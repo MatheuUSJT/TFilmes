@@ -19,12 +19,9 @@
             <label for="float-input-tarefa">Sinopse</label>
           </span><br>
 
-          <span class="p-float-label">
-            <input type="number" id="float-input-tarefa" pInputText name="genero" ngModel>
-            <label for="float-input-tarefa">Genero</label>
-          </span><br>
-
-          <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" placeholder="Selecione o Pais de Origem" name="origem_uf" ngModel></p-dropdown><br>
+          <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" placeholder="Selecione o Gênero do Filme" name="genero" ngModel></p-dropdown><br>
+          <br>
+          <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" placeholder="Selecione o País de Origem" name="origem_uf" ngModel></p-dropdown><br>
 
 
           <div class="container text-center">

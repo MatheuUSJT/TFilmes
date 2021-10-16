@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Filme } from '../model/filme';
+import { Genero } from '../model/genero';
 import { Pais } from '../model/pais';
 import { FilmeService } from './filme.service';
 
@@ -15,27 +16,32 @@ export class FilmeComponent implements OnInit {
   filmes: Filme[] = [];
   paises: Pais[] = [];
   paisSelecionado: number = 0;
+  generos: Genero[] = [];
+  generoSelecionado: number = 0;
 
   ngOnInit(){
+    //GET PARA EXIBIÇÃO DE FILMES
     //get Filmes
     this.filmeService.getColecaoAtualizada().subscribe(filmes =>{
       this.filmes = filmes;
     });
     this.filmeService.list();
 
+
+    //GETS PARA CADASTRO DE FILME
     //get Paises
     this.filmeService.returnPaises().subscribe(paises =>{
       this.paises= paises;
     });
     this.filmeService.getPaises();
 
-
+    //get generos
+    this.filmeService.returnGeneros().subscribe(generos =>{
+      this.generos = generos;
+    });
+    this.filmeService.getGeneros();
   }
 
-  postConsole(p: Pais){
-    console.log(p);
-
-  }
 
   url:string = ""
   onselectFile(e:any){
@@ -62,11 +68,8 @@ export class FilmeComponent implements OnInit {
       genero: filmeForm.value.genero,
       }
 
-      console.log(f);
-    //this.tarefas.push(t);
+    console.log(f);
     this.filmeService.add(f);
-    //this.total = this.total + tarefaForm.value.valor;
-    //this.clicar();
     filmeForm.resetForm();
   }
 
