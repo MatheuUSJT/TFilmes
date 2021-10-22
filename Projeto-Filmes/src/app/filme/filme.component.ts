@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Filme } from '../model/filme';
 import { Genero } from '../model/genero';
 import { Pais } from '../model/pais';
@@ -11,7 +12,7 @@ import { FilmeService } from './filme.service';
 })
 export class FilmeComponent implements OnInit {
 
-  constructor(private filmeService: FilmeService) { }
+  constructor(private filmeService: FilmeService, private router: Router){}
 
   filmes: Filme[] = [];
   paises: Pais[] = [];
@@ -21,21 +22,20 @@ export class FilmeComponent implements OnInit {
 
   ngOnInit(){
     //GET PARA EXIBIÇÃO DE FILMES
-    //get Filmes
+    //GET FILMES
     this.filmeService.getColecaoAtualizada().subscribe(filmes =>{
       this.filmes = filmes;
     });
     this.filmeService.list();
 
-
     //GETS PARA CADASTRO DE FILME
-    //get Paises
+    //GET PAISES
     this.filmeService.returnPaises().subscribe(paises =>{
       this.paises= paises;
     });
     this.filmeService.getPaises();
 
-    //get generos
+    //GET GENEROS
     this.filmeService.returnGeneros().subscribe(generos =>{
       this.generos = generos;
     });
@@ -57,25 +57,15 @@ export class FilmeComponent implements OnInit {
 
 
   adicionar(filmeForm: any){
-    //const newId = this.tarefas.length + 1;
-
     const f: Filme = {
-
       titulo: filmeForm.value.titulo,
       data_lancamento: filmeForm.value.data_lancamento,
       origem_uf: filmeForm.value.origem_uf,
       sinopse: filmeForm.value.sinopse,
       genero: filmeForm.value.genero,
       }
-
-    console.log(f);
     this.filmeService.add(f);
     filmeForm.resetForm();
-  }
-
-  atualizar (filme: Filme){
-    this.filmeService.update(filme);
-    //AQUI  this.tarefaService.update(tarefa);
   }
 
   excluir(filme: Filme){
@@ -83,5 +73,27 @@ export class FilmeComponent implements OnInit {
     //AQUI  this.tarefaService.delete(tarefa);
     console.log('sim excluindo');
   }
+
+  atualizar (editFilmeForm: any, filme: Filme){
+    var f = new Filme;
+    /*const f: Filme = {
+      titulo: editFilmeForm.value.titulo,
+    }
+    this.filmeService.update();*/
+    //AQUI  this.tarefaService.update(tarefa);
+
+    if(editFilmeForm.value.titulo === ''){f.titulo = filme.titulo;console.log("está nulo");}
+
+    if(editFilmeForm.value.data_lancamento === '')
+    {f.data_lancamento = filme.data_lancamento;}
+      else{f.data_lancamento = editFilmeForm.value.data_lancamento;}
+
+
+    console.log(filme.id_filme + " - " + f.titulo);
+  }
+
+  verDetalhes() {
+    this.router.navigate(['/detalhe-do-filme']);
+}
 
 }

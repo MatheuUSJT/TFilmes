@@ -1,0 +1,24 @@
+<main>
+  <p-tabView>
+    <h1>Faça Login</h1>
+    <br>
+    <br>
+
+    <p-card>
+      <form #formLogin="ngForm" (ngSubmit)="realizarLogin(formLogin)">
+        <span class="p-float-label">
+          <input name="email" type="text" placeholder="Login" pInputText ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          <input name="senha" type="text" placeholder="Senha" pInputText ngModel>
+        </span><br>
+
+        <p-button label="Realizar Login" type="submit"></p-button>
+      </form><!--Close Form-->
+    </p-card>
+
+    <br>
+    <br>
+  </p-tabView>
+</main>

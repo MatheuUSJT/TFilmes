@@ -23,6 +23,21 @@ const listar = (callback) => {
     );
 }
 
+const detalhesDoFilme = (callback) => {
+    const conexao = obterConexao();
+    conexao.query(
+        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', p.pais AS 'pais', f.sinopse AS 'sinopse', g.descricao AS 'genero'" +
+        " FROM filme f"+
+        " left join paises p on p.codigo = f.origem_uf"+
+        " left join genero g on g.codigo = f.genero"+
+        " where f.id_filme = ?",[filme.id_filme],
+        (erro, resultado) => {
+            callback(resultado)
+        }
+    );
+}
+
+
 const getGenero = (callback) => {
     const conexao = obterConexao();
     conexao.query(

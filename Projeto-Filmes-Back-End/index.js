@@ -1,6 +1,8 @@
 require('dotenv').config();
 const cors = require('cors');
 const db = require('./db');
+const dbComments = require('./comments');
+const dbLogin = require('./login');
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -47,10 +49,6 @@ app.get("/paises", (req, res) => {
     obterPaises(req, res);
 })
 
-/*app.get("/tarefas/total", (req, res) => {
-    obterTotal(req, res);
-})*/
-
 //http://localhost:3000/filmes (GET)
 app.get("/filmes", (req, res) => {
     obterFilmes(req, res);
@@ -78,3 +76,37 @@ app.delete("/filmes", (req, res) => {
 })
 
 
+//QUERYS COMMENTS
+
+app.get("/comments/:id",(req, res) => {
+    const {id} = req.params;
+    dbComments.getComments(id, comments =>{
+        comments = comments.map((c)=>{
+            return{id_comentario: c.id_comentario, texto: c.texto, data_lan: c.data_lan,
+                nome_usuario_lan: c.nome_usuario_lan, filme: c.filme}
+        });
+        res.json({comments});
+        
+    });   
+});
+
+
+
+
+//LOGIN
+app.get("/login/:email",(req,res)=>{
+    const reqemail = req.params;
+    var id = 3;
+    dbLogin.validarLogin(reqemail.email ,email=>{
+        console.log('funcioanndo')
+        res.json({email});
+        console.log(reqemail);
+        console.log({email});
+    }); 
+    
+    
+
+
+    
+    
+});

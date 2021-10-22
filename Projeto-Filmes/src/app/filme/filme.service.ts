@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 import { Filme } from '../model/filme';
 import { Pais } from '../model/pais';
 import { Genero } from '../model/genero';
+import { Comments } from '../model/comments';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class FilmeService {
   private colecaofilmes = new Subject<Filme[]>();
   private colecaoPaises = new Subject<Pais[]>();
   private colecaoGeneros = new Subject<Genero[]>();
+  private colecaoComments = new Subject<Comments[]>();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -77,6 +79,23 @@ export class FilmeService {
       this.colecaoGeneros.next(resultado.generos);
     });
   }
+
+
+
+
+  //GETS, INSERTS AND UPDATES COMMENTS
+  public getComments(id:number){
+    this.httpClient.get<{comments: Comments[]}>('http://localhost:3000/comments/' + id).subscribe(resultado => {
+      this.colecaoComments.next(resultado.comments);
+    })
+  }
+  //RETORNA COLEÇÃO ATUALIZADA DE COMENTARIOS
+  public getCommentsAtualizados(){
+    return this.colecaoComments.asObservable();
+  };
+
+
+
 
 //ULTIMA CHAVE
 }

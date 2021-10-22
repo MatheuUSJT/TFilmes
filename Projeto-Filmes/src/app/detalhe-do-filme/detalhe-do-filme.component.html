@@ -1,0 +1,33 @@
+<main>
+  <p-tabView>
+      <p-card>
+        <h2>Velozes e Furiosos</h2>
+        <br>
+        <div>Lançado em: 02/05/2020</div>
+        <br>
+        <div>Criado nos EUA</div>
+        <br>
+        <div>Gênero Ação</div>
+        <br>
+        <div>Sinopse: Filme de Corrida</div>
+        <br>
+        <br>
+        <br>
+        <h4>Comentários:</h4>
+        <div class="COMENTARIOS" *ngFor="let comment of comments">
+          <p-card>
+            {{comment.nome_usuario_lan}}
+            <br>
+            {{comment.texto}}
+          </p-card>
+        </div><!--Close Let Comentarios-->
+        <br>
+        <div>Compartilhe sua experiencia também!</div>
+        <textarea [rows]="5" [cols]="100" placeholder="Digite algo..." [(ngModel)]="comentario" pInputTextarea></textarea>
+        <br>
+        <div class="adicionar-botao">
+          <p-button label="Publicar" (onClick)="publicarComentario(comentario)" icon="pi pi-check"></p-button>
+        </div>
+      </p-card>
+  </p-tabView>
+</main>

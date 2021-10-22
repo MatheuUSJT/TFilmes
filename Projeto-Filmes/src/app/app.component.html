@@ -5,8 +5,15 @@
     <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css" />
   </head>
 
-  <app-filme></app-filme>
+  <!--<app-filme></app-filme>-->
 
+  <nav>
+    <a routerLink="/login" routerLinkActive="Active">Login</a>
+    <a routerLink="/filme" routerLinkActive="active">Lista de Filmes</a>
+    <a routerLink="/detalhe-do-filme" routerLinkActive="active">Detalhes dos Filmes</a>
+  </nav>
+
+  <router-outlet></router-outlet>
   <!--<form>
     <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
   </form> -->
