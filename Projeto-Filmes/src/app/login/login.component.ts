@@ -26,14 +26,7 @@ export class LoginComponent implements OnInit {
     var resposta: any;
     this.loginService.buscarLogin(l);
     resposta = this.loginService.retornarId();
-    console.log(this.loginService.buscarLogin(l));
-    resposta = 3;
-    if(resposta != null){
-      this.router.navigate(['/filme']);
-    }else{
-      console.log('Senha ou e-mail incorreto!');
-    }
-
+    console.log(resposta);
   }
 
 }

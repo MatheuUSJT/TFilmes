@@ -97,16 +97,23 @@ app.get("/comments/:id",(req, res) => {
 
 //LOGIN
 app.get("/login/:email/:senha",(req,res)=>{
-
+    console.log('aqui');
     login = {
         email: req.params.email,
         senha: req.params.senha
     }
 
+/*     dbLogin.validarLogin(login, id_usuario =>{
+        id_usuario = id_usuario.map((i)=>{
+            return{id_usuario: i.id_usuario};
+        });
+        res.json({id_usuario});
+    }); */
+
     dbLogin.validarLogin(login ,Id_usuario =>{
         var id = Id_usuario[0]["id_usuario"];
         console.log(id);
-        return id;
+        res.json({id});
     });
     
 });

@@ -16,16 +16,9 @@ export class LoginService {
   id_recebido: any;
 
   public buscarLogin(login: Login){
-     return this.httpClient.get('http://localhost:3000/login/' + login.email + '/' + login.senha, {responseType:"text"} )
-    .pipe();
+    this.httpClient.get('http://localhost:3000/login/' + login.email + '/' + login.senha, {responseType:'json'}).subscribe(resultado=>{
+      this.id_recebido = resultado})
   }
-/*
-  public buscarLogin(login: Login) {
-    return this.httpClient.get(this.id_recebido, {responseType: 'text'})
-    .pipe(
-      data => this.log(this.id_recebido, data),
-    )
-  } */
 
   public retornarId(){
     return this.id_recebido;
@@ -38,5 +31,5 @@ export class LoginService {
 }
 
 interface Id_usuario {
-  id_usuario: any;
+  id_usuariodb: any;
 }
