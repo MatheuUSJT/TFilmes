@@ -41,8 +41,8 @@ export class FilmeService {
   //CRIAR//
   //ATUALIZAR FILME
   public update(filme: Filme){
-    this.httpClient.put<{filme: Filme[]}>(this.baseUrl, filme).subscribe (resultado =>{
-      this.colecaofilmes.next(resultado.filme);
+    this.httpClient.put<{filmes: Filme[]}>(this.baseUrl, filme).subscribe (resultado =>{
+      this.colecaofilmes.next(resultado.filmes);
     });
   }
 

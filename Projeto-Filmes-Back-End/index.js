@@ -4,6 +4,7 @@ const db = require('./db');
 const dbComments = require('./comments');
 const dbLogin = require('./login');
 const express = require('express');
+const { json } = require('express');
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -16,8 +17,8 @@ app.listen(process.env.PORT, () => console.log("up and running"));
 const obterFilmes = (req, res) =>{
     db.listar((filmes)=>{
         filmes = filmes.map((f)=>{
-            return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, pais_origem: f.pais, sinopse: f.sinopse,
-            show_genero: f.genero}
+            return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, origem_uf: f.origem_uf, pais_origem: f.pais, sinopse: f.sinopse,
+            genero: f.genero, show_genero: f.show_genero}
         });
         res.json({filmes});
     });
@@ -64,7 +65,8 @@ app.post("/filmes", (req, res) => {
 });
 
 app.put("/filmes", (req, res) => {
-    db.atualizar(req.body, (resultado) =>{
+    const f = req.body;
+    db.atualizar(f, (resultado) =>{
         obterFilmes(req, res);
     });
 })
@@ -94,19 +96,17 @@ app.get("/comments/:id",(req, res) => {
 
 
 //LOGIN
-app.get("/login/:email",(req,res)=>{
-    const reqemail = req.params;
-    var id = 3;
-    dbLogin.validarLogin(reqemail.email ,email=>{
-        console.log('funcioanndo')
-        res.json({email});
-        console.log(reqemail);
-        console.log({email});
-    }); 
-    
-    
+app.get("/login/:email/:senha",(req,res)=>{
 
+    login = {
+        email: req.params.email,
+        senha: req.params.senha
+    }
 
-    
+    dbLogin.validarLogin(login ,Id_usuario =>{
+        var id = Id_usuario[0]["id_usuario"];
+        console.log(id);
+        return id;
+    });
     
 });

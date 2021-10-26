@@ -8,21 +8,27 @@ import { Login } from '../model/login';
 })
 
 export class LoginService {
+  log: any;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  private colecaoLogin = new Subject<Email[]>();
 
-  email: string = '';
+  id_recebido: any;
 
-  public buscarLogin(email: string){
-    this.httpClient.get<{logins: Email[]}>('http://localhost:3000/login/' + email).subscribe(resultado => {
-      this.colecaoLogin.next(resultado.logins);
-    });
+  public buscarLogin(login: Login){
+     return this.httpClient.get('http://localhost:3000/login/' + login.email + '/' + login.senha, {responseType:"text"} )
+    .pipe();
   }
+/*
+  public buscarLogin(login: Login) {
+    return this.httpClient.get(this.id_recebido, {responseType: 'text'})
+    .pipe(
+      data => this.log(this.id_recebido, data),
+    )
+  } */
 
-  public returnLogin(){
-    return this.colecaoLogin.asObservable();
+  public retornarId(){
+    return this.id_recebido;
   }
 
   public validarSenha(email: string){
@@ -31,6 +37,6 @@ export class LoginService {
 
 }
 
-interface Email{
-  email: any;
+interface Id_usuario {
+  id_usuario: any;
 }

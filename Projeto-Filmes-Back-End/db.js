@@ -12,7 +12,7 @@ const obterConexao = () => {
 const listar = (callback) => {
     const conexao = obterConexao();
     conexao.query(
-        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', p.pais AS 'pais', f.sinopse AS 'sinopse', g.descricao AS 'genero'" +
+        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', f.origem_uf AS 'origem_uf', p.pais AS 'pais', f.sinopse AS 'sinopse', f.genero AS 'genero',g.descricao AS 'shoq_genero'" +
         " FROM filme f"+
         " left join paises p on p.codigo = f.origem_uf"+
         " left join genero g on g.codigo = f.genero"+
@@ -74,7 +74,7 @@ const atualizar = (filme, callback) =>{
     const conexao = obterConexao();
     conexao.execute(
         'UPDATE filme SET titulo=?, data_lancamento=? origem_uf=?, sinopse=?, genero=? WHERE id_filme=?',
-        [filme.titulo, filme.data_lancamento, filme.origem_uf, filme.sinopse, filme.genero],
+        [filme.titulo, filme.data_lancamento, filme.origem_uf, filme.sinopse, filme.genero, filme.id_filme],
         (erro, resultado) =>{
             callback(resultado);
         }

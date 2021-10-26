@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { routing } from './app.routing';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TabViewModule } from 'primeng/tabview';
@@ -16,12 +17,7 @@ import { AppComponent } from './app.component';
 import { FilmeComponent } from './filme/filme.component';
 import { DetalheDoFilmeComponent } from './detalhe-do-filme/detalhe-do-filme.component';
 import { LoginComponent } from './login/login.component';
-
-const routes: Routes = [
-  { path:'detalhe-do-filme', component: DetalheDoFilmeComponent },
-  { path:'filme', component: FilmeComponent },
-  { path:'login', component: LoginComponent }
-];
+import { CadastroFilmeComponent } from './cadastro-filme/cadastro-filme.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +25,10 @@ const routes: Routes = [
     FilmeComponent,
     DetalheDoFilmeComponent,
     LoginComponent,
+    CadastroFilmeComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    routing,
     BrowserModule,
     HttpClientModule,
     DropdownModule,

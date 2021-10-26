@@ -1,0 +1,39 @@
+<main>
+  <p-tabView>
+    <p-tabPanel header="Cadastro">
+      <p-card header="Filmes">
+
+        <form #filmeForm="ngForm" (ngSubmit)="adicionar(filmeForm)">
+          <span class="p-float-label">
+            <input type="text" id="float-input" pInputText name="titulo" ngModel>
+            <label for="float-input">Titulo</label>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="date" id="float-input-tarefa" pInputText name="data_lancamento" ngModel>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="sinopse" ngModel>
+            <label for="float-input-tarefa">Sinopse</label>
+          </span><br>
+
+          <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" placeholder="Selecione o Gênero do Filme" name="genero" ngModel></p-dropdown><br>
+          <br>
+          <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" placeholder="Selecione o País de Origem" name="origem_uf" ngModel></p-dropdown><br>
+
+
+          <div class="container text-center">
+            <img [src]="url"  height="200"><br>
+            <input type="file" (change)="onselectFile($event)">
+          </div>
+          <br>
+          <br>
+          <div class="adicionar-botao">
+            <p-button label="Adicionar" type="submit" icon="pi pi-check"></p-button>
+          </div>
+        </form>
+      </p-card>
+    </p-tabPanel>
+  </p-tabView>
+</main>

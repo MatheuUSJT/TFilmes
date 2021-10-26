@@ -42,32 +42,6 @@ export class FilmeComponent implements OnInit {
     this.filmeService.getGeneros();
   }
 
-
-  url:string = ""
-  onselectFile(e:any){
-      if(e.target.files){
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload=(event:any)=>{
-          this.url = event.target.result;
-        }
-      }
-  }
-
-
-
-  adicionar(filmeForm: any){
-    const f: Filme = {
-      titulo: filmeForm.value.titulo,
-      data_lancamento: filmeForm.value.data_lancamento,
-      origem_uf: filmeForm.value.origem_uf,
-      sinopse: filmeForm.value.sinopse,
-      genero: filmeForm.value.genero,
-      }
-    this.filmeService.add(f);
-    filmeForm.resetForm();
-  }
-
   excluir(filme: Filme){
     this.filmeService.delete(filme);
     //AQUI  this.tarefaService.delete(tarefa);
@@ -76,24 +50,31 @@ export class FilmeComponent implements OnInit {
 
   atualizar (editFilmeForm: any, filme: Filme){
     var f = new Filme;
-    /*const f: Filme = {
-      titulo: editFilmeForm.value.titulo,
-    }
-    this.filmeService.update();*/
-    //AQUI  this.tarefaService.update(tarefa);
 
-    if(editFilmeForm.value.titulo === ''){f.titulo = filme.titulo;console.log("está nulo");}
+    f.id_filme = filme.id_filme;
+
+    if(editFilmeForm.value.titulo === '')
+    {f.titulo = filme.titulo;}
+      else{f.titulo = editFilmeForm.value.titulo};
 
     if(editFilmeForm.value.data_lancamento === '')
     {f.data_lancamento = filme.data_lancamento;}
-      else{f.data_lancamento = editFilmeForm.value.data_lancamento;}
+      else{f.data_lancamento = editFilmeForm.value.data_lancamento;};
 
+    if(editFilmeForm.value.origem_uf === '')
+    {f.origem_uf = filme.origem_uf;}
+      else{f.origem_uf = editFilmeForm.value.origem_uf;};
 
-    console.log(filme.id_filme + " - " + f.titulo);
-  }
+    if(editFilmeForm.value.sinopse === '')
+    {f.sinopse = filme.sinopse;}
+      else{f.sinopse = editFilmeForm.value.sinopse;};
 
-  verDetalhes() {
-    this.router.navigate(['/detalhe-do-filme']);
-}
+    if(editFilmeForm.value.genero === '')
+    {f.genero = filme.genero;}
+      else{f.genero = editFilmeForm.value.genero;};
+
+    this.filmeService.update(f);
+    console.log(f);
+  }//CLOSE ATUALIZAR
 
 }

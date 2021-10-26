@@ -10,11 +10,11 @@ const obterConexao = () => {
 };
 
 
-const validarLogin = (reqemail, callback) => {
+const validarLogin = (login, callback) => {
     const conexao = obterConexao();
     conexao.query(
-        "select email from usuario where email=?",
-        [reqemail],
+        "select id_usuario from usuario where email=? and senha=MD5(?)",
+        [login.email, login.senha],
         (erro, resultado) => {
             callback(resultado);
         }

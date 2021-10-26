@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../model/login';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,30 +11,33 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
 
   login: Login = new Login();
-  emaildb: Email[] = [];
-  email: string = '';
 
-  constructor(private loginService : LoginService) { }
+  constructor(private loginService : LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   realizarLogin(formLogin: any){
-    console.log("realizando login")
-    this.email = formLogin.value.email;
-
-    var recebe;
-
-    this.loginService.buscarLogin(this.email)
-    this.loginService.returnLogin().subscribe(email=>{
-      recebe = email;
-    });
-    console.log({recebe});
+    console.log("realizando login");
+    const l: Login ={
+      email: formLogin.value.email,
+      senha: formLogin.value.senha
+    }
+    var resposta: any;
+    this.loginService.buscarLogin(l);
+    resposta = this.loginService.retornarId();
+    console.log(this.loginService.buscarLogin(l));
+    resposta = 3;
+    if(resposta != null){
+      this.router.navigate(['/filme']);
+    }else{
+      console.log('Senha ou e-mail incorreto!');
+    }
 
   }
 
 }
 
-interface Email {
-  email: any;
+interface Id_usuario {
+  id_usuario: number;
 }
