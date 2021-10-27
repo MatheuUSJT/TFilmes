@@ -25,7 +25,10 @@
 
           <div class="container text-center">
             <img [src]="url"  height="200"><br>
-            <input type="file" (change)="onselectFile($event)">
+            <input type="file" (change)="onChange($event)">
+            <br>
+            <br>
+            <p-button (click)="onUpload()"> Salvar IMG </p-button>
           </div>
           <br>
           <br>

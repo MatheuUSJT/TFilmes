@@ -10,7 +10,7 @@ import { Genero } from '../model/genero';
   providedIn: 'root'
 })
 
-export class CadastroFilmeComponent{
+export class CadastroFilmeService{
   private baseUrl: string = 'http://localhost:3000/filmes';
   private colecaoPaises = new Subject<Pais[]>();
   private colecaoGeneros = new Subject<Genero[]>();
@@ -21,6 +21,15 @@ export class CadastroFilmeComponent{
   public add(filme: Filme){
     this.httpClient.post<{filmes: Filme[]}>(this.baseUrl, filme);
   }
+  //SALVAR IMG-FILME
+  public upload(files: Set<File>){
+    const formData = new FormData();
+    files.forEach(file => formData.append('file', file, file.name));
+
+    return this.httpClient.post('http://localhost:3000/filmes/upload', formData);
+  }
+
+
 
   //GETs DE PAIS E GENERO PARA CADASTRO DE FILMES
   public returnPaises(){

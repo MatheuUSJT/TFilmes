@@ -5,6 +5,8 @@ const dbComments = require('./comments');
 const dbLogin = require('./login');
 const express = require('express');
 const { json } = require('express');
+const multipart = require('connect-multiparty')
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -56,13 +58,28 @@ app.get("/filmes", (req, res) => {
     //res.json({tarefas});
 })
 
-//http://localhost:3000/tarefas (POST)
+
+
+
+//CADASTRO DE FILME
+//INFOS
 app.post("/filmes", (req, res) => {
     const t = req.body;
     db.inserir(t, (resultado) =>{
         obterFilmes(req, res);
     });
 });
+
+//SALVAR IMG DO CADASTRO
+const multipartMiddleware = multipart({ uploadDir: './img-filme'});
+app.post('/filmes/upload', multipartMiddleware, (req, res)=>{
+    const files = req.files;
+    console.log(files);
+    res.json({message: files});
+});
+
+
+
 
 app.put("/filmes", (req, res) => {
     const f = req.body;
