@@ -5,7 +5,16 @@
     <br>
 
     <p-card>
-      <form #formLogin="ngForm" (ngSubmit)="realizarLogin(formLogin)">
+      <span class="p-float-label">
+        <input name="email" type="text" placeholder="Login" [(ngModel)]="login.email" pInputText>
+      </span><br>
+
+      <span class="p-float-label">
+        <input name="senha" type="text" placeholder="Senha" [(ngModel)]="login.senha" pInputText>
+      </span><br>
+
+      <p-button label="Realizar Login" (onClick)="realizarLogin()"></p-button>
+     <!-- <form #formLogin="ngForm" (ngSubmit)="realizarLogin(formLogin)">
         <span class="p-float-label">
           <input name="email" type="text" placeholder="Login" pInputText ngModel>
         </span><br>
@@ -15,7 +24,7 @@
         </span><br>
 
         <p-button label="Realizar Login" type="submit"></p-button>
-      </form><!--Close Form-->
+      </form>Close Form-->
     </p-card>
 
     <br>

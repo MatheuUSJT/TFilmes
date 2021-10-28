@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
-import { Filme } from '../model/filme';
-import { Pais } from '../model/pais';
-import { Genero } from '../model/genero';
+import { Filme } from '../../model/filme';
+import { Pais } from '../../model/pais';
+import { Genero } from '../../model/genero';
 
 
 @Injectable({

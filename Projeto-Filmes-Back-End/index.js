@@ -114,23 +114,28 @@ app.get("/comments/:id",(req, res) => {
 
 //LOGIN
 app.get("/login/:email/:senha",(req,res)=>{
-    console.log('aqui');
-    login = {
-        email: req.params.email,
-        senha: req.params.senha
+    
+    if( req.params.email != 'undefined' || req.params.senha != 'undefined' ){
+        login = {
+            email: req.params.email,
+            senha: req.params.senha
+        }
+
+        console.log('email ' + req.params.email );
+        console.log('senha ' + req.params.senha);
+    
+        dbLogin.validarLogin(login ,Id_usuario =>{
+            var id = Id_usuario[0]["id_usuario"];
+            console.log(id);
+            res.json({id});
+        });
+
+    }else{
+        var msg = "informe o login e a senha";
+        res.json({msg});
     }
 
-/*     dbLogin.validarLogin(login, id_usuario =>{
-        id_usuario = id_usuario.map((i)=>{
-            return{id_usuario: i.id_usuario};
-        });
-        res.json({id_usuario});
-    }); */
 
-    dbLogin.validarLogin(login ,Id_usuario =>{
-        var id = Id_usuario[0]["id_usuario"];
-        console.log(id);
-        res.json({id});
-    });
+
     
 });

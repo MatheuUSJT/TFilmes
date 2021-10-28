@@ -15,9 +15,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FilmeComponent } from './filme/filme.component';
-import { DetalheDoFilmeComponent } from './detalhe-do-filme/detalhe-do-filme.component';
+import { DetalheDoFilmeComponent } from './filme/detalhe-do-filme/detalhe-do-filme.component';
 import { LoginComponent } from './login/login.component';
-import { CadastroFilmeComponent } from './cadastro-filme/cadastro-filme.component';
+import { CadastroFilmeComponent } from './filme/cadastro-filme/cadastro-filme.component';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { CadastroFilmeComponent } from './cadastro-filme/cadastro-filme.componen
     ToggleButtonModule,
     InputTextareaModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 })

@@ -3,6 +3,7 @@ import { Login } from '../model/login';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,26 +12,33 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   login: Login = new Login();
+  private usuarioAutenticado: number = 0;
 
   constructor(private loginService : LoginService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
-  realizarLogin(formLogin: any){
+  realizarLogin(){
     console.log("realizando login");
-    const l: Login ={
+    /* const l: Login ={
       email: formLogin.value.email,
       senha: formLogin.value.senha
-    }
+    } */
     var resposta: any;
-    this.loginService.buscarLogin(l);
+    this.loginService.buscarLogin(this.login);
     resposta = this.loginService.retornarId();
-    console.log(resposta);
+
+
+    if(resposta != null){
+      this.usuarioAutenticado = resposta.id;
+      this.loginService.navegar(this.usuarioAutenticado);
+    }else{
+      console.log('informe o login e a senha');
+    }
+
   }
 
 }
 
-interface Id_usuario {
-  id_usuario: number;
-}

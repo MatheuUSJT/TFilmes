@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FilmeService } from '../filme/filme.service';
-import { Filme } from '../model/filme';
-import { Genero } from '../model/genero';
-import { Pais } from '../model/pais';
+import { FilmeService } from '../filme.service';
+import { Filme } from '../../model/filme';
+import { Genero } from '../../model/genero';
+import { Pais } from '../../model/pais';
 import { CadastroFilmeService } from './cadastro-filme.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Subject} from 'rxjs';
-import { Filme } from '../model/filme';
-import { Comments } from '../model/comments';
+import { Filme } from '../../model/filme';
+import { Comments } from '../../model/comments';
 
 @Injectable({
   providedIn: 'root'
