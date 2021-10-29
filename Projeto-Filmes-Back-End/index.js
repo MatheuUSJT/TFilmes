@@ -13,7 +13,6 @@ app.use(cors());
 
 app.listen(process.env.PORT, () => console.log("up and running"));
 
-
 // MYSQL 
 
 const obterFilmes = (req, res) =>{
@@ -60,22 +59,43 @@ app.get("/filmes", (req, res) => {
 
 
 
-
+var Cadastro = {
+    titulo: '',
+    data_lancamento: '',
+    origem_uf: 0,
+    sinopse: '',
+    genero: 0,
+    imagem: ''
+}
 //CADASTRO DE FILME
 //INFOS
 app.post("/filmes", (req, res) => {
     const t = req.body;
-    db.inserir(t, (resultado) =>{
+    Cadastro.titulo = t.titulo;
+    Cadastro.data_lancamento = t.data_lancamento;
+    Cadastro.origem_uf = t.origem_uf;
+    Cadastro.sinopse = t.sinopse;
+    Cadastro.genero = t.genero;
+    console.log(Cadastro);
+    /* db.inserir(t, (resultado) =>{
         obterFilmes(req, res);
-    });
+    }); */
 });
 
 //SALVAR IMG DO CADASTRO
-const multipartMiddleware = multipart({ uploadDir: './img-filme'});
+//const multipartMiddleware = multipart({ uploadDir: './img-filme'});
+var img;
+const multipartMiddleware = multipart({ uploadDir: '../Projeto-Filmes/src/assets/imgs'});
 app.post('/filmes/upload', multipartMiddleware, (req, res)=>{
     const files = req.files;
-    console.log(files);
-    res.json({message: files});
+    var strigRetorno = files['file']['path'];
+    img = '..' + strigRetorno.substring(21);
+    
+    Cadastro.imagem = img;
+
+    db.inserir(Cadastro);
+
+    res.json({strigRetorno});
 });
 
 

@@ -14,6 +14,7 @@ export class CadastroFilmeService{
   private baseUrl: string = 'http://localhost:3000/filmes';
   private colecaoPaises = new Subject<Pais[]>();
   private colecaoGeneros = new Subject<Genero[]>();
+  private imgCadastrada?: string;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -28,8 +29,6 @@ export class CadastroFilmeService{
 
     return this.httpClient.post('http://localhost:3000/filmes/upload', formData);
   }
-
-
 
   //GETs DE PAIS E GENERO PARA CADASTRO DE FILMES
   public returnPaises(){

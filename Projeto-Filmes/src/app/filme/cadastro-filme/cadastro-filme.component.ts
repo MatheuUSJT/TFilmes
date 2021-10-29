@@ -13,11 +13,13 @@ import { CadastroFilmeService } from './cadastro-filme.service';
 })
 export class CadastroFilmeComponent implements OnInit {
 
-  filmes: Filme[] = [];
+  private imagemFilme?: any;
   paises: Pais[] = [];
   paisSelecionado: number = 0;
   generos: Genero[] = [];
   generoSelecionado: number = 0;
+
+
 
   constructor(private filmeService: FilmeService, private router: Router, private cadastroService: CadastroFilmeService) { }
 
@@ -47,6 +49,16 @@ export class CadastroFilmeComponent implements OnInit {
       genero: filmeForm.value.genero,
       }
     this.filmeService.add(f);
+
+
+    if(this.files && this.files.size > 0 ){
+      this.cadastroService.upload(this.files).subscribe(resposta=>{
+        this.imagemFilme = resposta;
+        console.log('UPLOAD REALIZADO')
+        console.log(this.imagemFilme)
+      });
+    }
+
     filmeForm.resetForm();
   }
 
@@ -72,7 +84,11 @@ export class CadastroFilmeComponent implements OnInit {
 
   onUpload(){
     if(this.files && this.files.size > 0 ){
-      this.cadastroService.upload(this.files).subscribe(resposta=>console.log('UPLOAD REALIZADO'))
+      this.cadastroService.upload(this.files).subscribe(resposta=>{
+        this.imagemFilme = resposta;
+        console.log('UPLOAD REALIZADO')
+        console.log(this.imagemFilme)
+      });
     }
   }
 

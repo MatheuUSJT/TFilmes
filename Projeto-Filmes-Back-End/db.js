@@ -62,10 +62,10 @@ const getPais = (callback) => {
 const inserir = (filme, callback) => {
     const conexao = obterConexao();
     conexao.execute(
-        'INSERT INTO filme(titulo,origem_uf,sinopse,genero,data_lancamento) VALUES (?,?,?,?,?)',
-        [filme.titulo, filme.origem_uf, filme.sinopse, filme.genero, filme.data_lancamento],
+        'INSERT INTO filme(titulo,origem_uf,sinopse,genero,data_lancamento,imagem) VALUES (?,?,?,?,?,?)',
+        [filme.titulo, filme.origem_uf, filme.sinopse, filme.genero, filme.data_lancamento, filme.imagem],
         (erro, resultado) =>{
-            callback(resultado);
+            console.log(resultado);
         }
     );
 }

@@ -8,7 +8,7 @@ export class Filme {
   genero!: number;
   update_usuario?: number;
   update_data_hora?: Date;
-  imagem?: string;
+  imagem?: File;
 
   //show
   pais_origem?: string;
