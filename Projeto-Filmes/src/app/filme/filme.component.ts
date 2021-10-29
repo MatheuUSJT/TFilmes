@@ -77,4 +77,10 @@ export class FilmeComponent implements OnInit {
     console.log(f);
   }//CLOSE ATUALIZAR
 
+
+  verDetalheFilme(id_filme:any){
+    console.log('Clicando no filme de id: ' + id_filme);
+    this.router.navigate(['/detalhe-filme', id_filme]);
+  }
+
 }

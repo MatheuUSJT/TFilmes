@@ -15,7 +15,7 @@ export class DetalheService {
   constructor(private httpClient: HttpClient) { }
 
   //GETS, INSERTS AND UPDATES COMENTARIOS
-  public getComments(id:number){
+  public getComments(id:any){
     this.httpClient.get<{comments: Comments[]}>('http://localhost:3000/comments/' + id).subscribe(resultado => {
       this.colecaoComments.next(resultado.comments);
     })

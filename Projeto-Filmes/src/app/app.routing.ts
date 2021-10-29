@@ -6,7 +6,7 @@ import { FilmeComponent } from "./filme/filme.component";
 import { LoginComponent } from "./login/login.component";
 
 const APP_ROUTES: Routes = [
-  //{ path: 'detalhe-filme/:id_filme', component: DetalheDoFilmeComponent},
+  { path: 'detalhe-filme/:id_filme', component: DetalheDoFilmeComponent},
   { path: 'detalhes', component: DetalheDoFilmeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'cadastro-filme', component: CadastroFilmeComponent},

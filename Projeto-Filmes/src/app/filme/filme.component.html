@@ -16,13 +16,9 @@
           </div>
           <br>
           <div class="adicionar-botao">
-            <p-button label="Ver Detalhes" icon="pi pi-check"></p-button>
+            <p-button label="Ver Detalhes" icon="pi pi-check" (click)="verDetalheFilme(filme.id_filme)"></p-button>
           </div>
           <br>
-          <!--Botão para excluir Filme-->
-          <ng-template pTemplate="footer">
-            <p-button class="btn-excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
-          </ng-template>
         </p-card>
       </div><!--Close Let Filmes-->
     </p-tabPanel><!--Close Movie's View-->
@@ -54,6 +50,12 @@
 
             <div class="adicionar-botao">
               <p-button label="Adicionar" (onClick)="atualizar(editFilmeForm, filme)" icon="pi pi-check"></p-button>
+            </div>
+            <br>
+
+            <!--Botão para excluir Filme-->
+            <div>
+              <p-button class="btn-excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
             </div>
           </form><!--Close Form-->
           <br>
