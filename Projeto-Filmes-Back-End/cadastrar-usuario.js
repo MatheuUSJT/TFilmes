@@ -20,6 +20,18 @@ const validarEmail = (email, callback) => {
     );
 };
 
+const cadastrarUsuario = (usuario, callback) => {
+    const conexao = obterConexao();
+    conexao.execute(
+        'INSERT INTO usuario(nome,email,senha) VALUES (?,?,MD5(?))',
+        [usuario.nome, usuario.email, usuario.senha],
+        (erro, resultado) =>{
+            callback(resultado);
+        }
+    );
+}
+
 module.exports = {
-    validarEmail
+    validarEmail,
+    cadastrarUsuario
 }
