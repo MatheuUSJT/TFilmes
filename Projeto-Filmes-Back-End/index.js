@@ -3,6 +3,7 @@ const cors = require('cors');
 const db = require('./db');
 const dbComments = require('./comments');
 const dbLogin = require('./login');
+const dbCadastro = require('./cadastrar-usuario');
 const express = require('express');
 const { json } = require('express');
 const multipart = require('connect-multiparty')
@@ -163,8 +164,20 @@ app.get("/login/:email/:senha",(req,res)=>{
         var msg = "informe o login e a senha";
         res.json({msg});
     }
+});
 
 
-
+app.post("/cadastro-usuario",(req, res)=>{
+    const cadastro = req.body;
     
+    dbCadastro.validarEmail(cadastro.email, resposta=>{
+        if(resposta[0]){
+            //USUARIO EXISTE
+            res.json(resposta[0]['id_usuario']);
+        }else{
+            //CADASTRAR NOVO
+            
+        }
+
+    });
 });
