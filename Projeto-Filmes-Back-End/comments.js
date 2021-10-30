@@ -22,33 +22,35 @@ const getComments = (id, callback) => {
     );
 };
 
-const insertComments = (comment, callback) => {
+const inserirComentarios = (comment, callback) => {
     var data = new Date();
     var dia = String(data.getDate()).padStart(2, '0');
     var mes = String(data.getMonth() + 1).padStart(2, '0');
     var ano = data.getFullYear();
-    dataAtual = dia + '/' + mes + '/' + ano;
+    dataAtual = ano + '-' + mes + '-' + dia;
     var usuario_lan = 3;
+
+    console.log(dataAtual);
 
     const conexao = obterConexao();
     conexao.execute(
         'INSERT INTO comentario(texto,data_lan,usuario_lan,filme) VALUES (?,?,?,?)',
-        [comment.texto, dataAtual, usuario_lan, comment.filme],
+        [comment.texto, dataAtual, comment.usuario_lan, comment.filme],
         (erro, resultado) =>{
-            callback(resultado);
+            console.log(resultado);
         }
     );
 }
 
 
-const getFilme = (callback) => {
+const getFilme = (id, callback) => {
     const conexao = obterConexao();
     conexao.query(
         "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', f.origem_uf AS 'origem_uf', p.pais AS 'pais', f.sinopse AS 'sinopse', f.genero AS 'genero',g.descricao AS 'shoq_genero'" +
         " FROM filme f"+
         " left join paises p on p.codigo = f.origem_uf"+
         " left join genero g on g.codigo = f.genero"+
-        " where f.ativo = 1",
+        " where f.id_filme = ?",[id],
         (erro, resultado) => {
             callback(resultado)
         }
@@ -56,10 +58,8 @@ const getFilme = (callback) => {
 }
 
 
-
-
-
 module.exports = {
     getComments,
-    insertComments
+    inserirComentarios,
+    getFilme
 };

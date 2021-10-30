@@ -129,6 +129,15 @@ app.get("/comments/:id",(req, res) => {
     });   
 });
 
+app.post("/comentario/cadastrar",(req, res)=>{
+    console.log('comentario');
+    const comentario = req.body;
+    console.log(comentario);
+    dbComments.inserirComentarios(comentario, resposta =>{
+        console.log({resposta});
+    });
+});
+
 
 
 

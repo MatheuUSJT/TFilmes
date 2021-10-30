@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/internal/operators';
 import { Filme } from '../model/filme';
 import { Genero } from '../model/genero';
 import { Pais } from '../model/pais';
@@ -10,7 +12,7 @@ import { FilmeService } from './filme.service';
   templateUrl: './filme.component.html',
   styleUrls: ['./filme.component.css']
 })
-export class FilmeComponent implements OnInit {
+export class FilmeComponent implements OnInit, OnDestroy {
 
   constructor(private filmeService: FilmeService, private router: Router){}
 
@@ -20,27 +22,34 @@ export class FilmeComponent implements OnInit {
   generos: Genero[] = [];
   generoSelecionado: number = 0;
 
+  unsub$ = new Subject();
+
   ngOnInit(){
     //GET PARA EXIBIÇÃO DE FILMES
     //GET FILMES
-    this.filmeService.getColecaoAtualizada().subscribe(filmes =>{
+    this.filmeService.getColecaoAtualizada().pipe(take(1)).subscribe(filmes =>{
       this.filmes = filmes;
     });
     this.filmeService.list();
 
     //GETS PARA CADASTRO DE FILME
     //GET PAISES
-    this.filmeService.returnPaises().subscribe(paises =>{
+    this.filmeService.returnPaises().pipe(take(1)).subscribe(paises =>{
       this.paises= paises;
     });
     this.filmeService.getPaises();
 
     //GET GENEROS
-    this.filmeService.returnGeneros().subscribe(generos =>{
+    this.filmeService.returnGeneros().pipe(take(1)).subscribe(generos =>{
       this.generos = generos;
     });
     this.filmeService.getGeneros();
   }
+
+  ngOnDestroy() {
+
+  }
+
 
   excluir(filme: Filme){
     this.filmeService.delete(filme);

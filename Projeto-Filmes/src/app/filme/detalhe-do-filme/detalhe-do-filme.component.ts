@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/internal/operators';
 import { LoginService } from 'src/app/login/login.service';
 import { Comments } from '../../model/comments';
 import { DetalheService } from './detalhe.service';
@@ -12,7 +13,7 @@ import { DetalheService } from './detalhe.service';
 export class DetalheDoFilmeComponent implements OnInit {
 
   private id_usuario?: number;
-  private id_filme?: number;
+  private id_filme!: number;
   comments: Comments[]=[];
 
 
@@ -23,7 +24,7 @@ export class DetalheDoFilmeComponent implements OnInit {
 
   ngOnInit(): void {
     //GET COMENTARIOS
-    this.detalheService.getCommentsAtualizados().subscribe(comments =>{
+    this.detalheService.getCommentsAtualizados().pipe(take(1)).subscribe(comments =>{
       this.comments = comments;
     });
     this.detalheService.getComments(this.id_filme);
@@ -35,9 +36,17 @@ export class DetalheDoFilmeComponent implements OnInit {
 
   comentario: string = '';
   publicarComentario(comentario: any){
+    var aux: number = this.id_filme;
     if(this.id_usuario != null){
-      console.log('Comentário: ' + comentario);
-      console.log('ID do usuário: ' + this.id_usuario);
+      const c: Comments = {
+        texto: comentario,
+        usuario_lan: this.id_usuario,
+        filme: aux
+      };
+
+      console.log('gravar comentario');
+      this.detalheService.inserirComentarios(c);
+
     }else{
       console.log('Faça LOGIN para poder comentar.');
     }
