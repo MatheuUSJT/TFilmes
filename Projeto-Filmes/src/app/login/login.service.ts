@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
-import {Subject} from 'rxjs';
+//import {Subject} from 'rxjs';
 import { Login } from '../model/login';
-import { delay, take } from 'rxjs/internal/operators';
+import { take } from 'rxjs/internal/operators';
 import { Router } from '@angular/router';
 
 @Injectable({

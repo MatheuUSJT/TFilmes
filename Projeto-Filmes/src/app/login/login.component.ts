@@ -37,8 +37,14 @@ export class LoginComponent implements OnInit {
     }else{
       console.log('informe o login e a senha');
     }
-
   }
+
+
+  cadastrarUsuario(){
+    this.router.navigate(['/cadastro-usuario'])
+  }
+
+
 
 }
 

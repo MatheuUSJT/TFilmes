@@ -1,0 +1,28 @@
+<main>
+  <p-tabView>
+
+    <h1>Cadastre-se</h1>
+
+    <p-card>
+      <form #cadastroForm="ngForm" (ngSubmit)="cadastrar(cadastroForm)">
+        <span class="p-float-label">
+          <input type="text" pInputText name="nome" placeholder="Nome" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          <input type="text" pInputText name="email" placeholder="E-mail" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          <input type="password" pInputText name="senha" placeholder="Senha" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          <input type="password" pInputText name="confirmaSenha" placeholder="Confirme sua senha" ngModel>
+        </span><br>
+
+        <p-button type="submit">Confirmar</p-button>
+      </form>
+    </p-card>
+  </p-tabView>
+</main>

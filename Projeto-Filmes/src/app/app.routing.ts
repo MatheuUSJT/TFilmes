@@ -4,12 +4,14 @@ import { CadastroFilmeComponent } from "./filme/cadastro-filme/cadastro-filme.co
 import { DetalheDoFilmeComponent } from "./filme/detalhe-do-filme/detalhe-do-filme.component";
 import { FilmeComponent } from "./filme/filme.component";
 import { LoginComponent } from "./login/login.component";
+import { CadastroUsuarioComponent } from "./login/cadastro-usuario/cadastro-usuario.component";
 
 const APP_ROUTES: Routes = [
   { path: 'detalhe-filme/:id_filme', component: DetalheDoFilmeComponent},
   { path: 'detalhes', component: DetalheDoFilmeComponent},
-  { path: 'login', component: LoginComponent},
   { path: 'cadastro-filme', component: CadastroFilmeComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent},
   { path: '', component: FilmeComponent}
 ];
 

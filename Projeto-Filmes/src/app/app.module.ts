@@ -17,15 +17,18 @@ import { AppComponent } from './app.component';
 /* import { FilmeComponent } from './filme/filme.component';
 import { DetalheDoFilmeComponent } from './filme/detalhe-do-filme/detalhe-do-filme.component';
 import { LoginComponent } from './login/login.component';
+import { CadastroUsuarioComponent } from './login/cadastro-usuario/cadastro-usuario.component';
 import { CadastroFilmeComponent } from './filme/cadastro-filme/cadastro-filme.component'; */
 import { LoginService } from './login/login.service';
 import { FilmeModule } from './filme/filme.module';
 import { LoginModule } from './login/login.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-  /*LoginComponent,
+  /*CadastroUsuarioComponent,
+    LoginComponent,
     FilmeComponent,
     DetalheDoFilmeComponent,
     CadastroFilmeComponent, */
