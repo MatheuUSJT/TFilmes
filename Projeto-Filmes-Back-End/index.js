@@ -169,15 +169,18 @@ app.get("/login/:email/:senha",(req,res)=>{
 
 app.post("/cadastro-usuario",(req, res)=>{
     const c = req.body;
-    
+    var id;
     dbCadastro.validarEmail(c.email, resposta=>{
         if(resposta[0]){
             //USUARIO EXISTE
-            res.json(resposta[0]['id_usuario']);
+            id = resposta[0]['id_usuario'];
+            var msg = 'E-mail já cadastrado';
+            res.json({msg});
         }else{
             //CADASTRAR NOVO
             dbCadastro.cadastrarUsuario(c,resp =>{
-                res.json(resp.insertId);
+                id = resp.insertId;
+                res.json({id});
             });
         }
 

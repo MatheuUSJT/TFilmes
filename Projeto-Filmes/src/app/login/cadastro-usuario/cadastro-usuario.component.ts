@@ -31,7 +31,14 @@ export class CadastroUsuarioComponent implements OnInit {
         this.cadastroService.cadastrarUsuario(u);
       }//CLOSE 2 ELSE
     }//CLOSE 1 ELSE
-
+    var id = this.cadastroService.getId_usuario();
+    if(typeof id.id === "number"){
+      console.log('tipo number');
+      this.cadastroService.navegar();
+    }else{
+      console.log('tipo string');
+      this.cadastroService.logar();
+    }
   }//CLOSE CADASTRAR
 
 }

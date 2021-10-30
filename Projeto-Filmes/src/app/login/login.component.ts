@@ -22,10 +22,7 @@ export class LoginComponent implements OnInit {
 
   realizarLogin(){
     console.log("realizando login");
-    /* const l: Login ={
-      email: formLogin.value.email,
-      senha: formLogin.value.senha
-    } */
+
     var resposta: any;
     this.loginService.buscarLogin(this.login);
     resposta = this.loginService.retornarId();

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
+import { LoginService } from '../login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,27 @@ import { Usuario } from 'src/app/model/usuario';
 
 export class CadastroService {
 
+  private id_usuario!: any;
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient, private router: Router, private loginService: LoginService) {}
 
   public cadastrarUsuario(usuario: Usuario){
-    this.httpClient.post<{usuario: Usuario[]}>("http://localhost:3000/cadastro-usuario", usuario)
-    .subscribe(resultado=>{console.log(resultado)});
+    this.httpClient.post<{id: number}>("http://localhost:3000/cadastro-usuario", usuario)
+    .subscribe(resultado=>{
+      this.id_usuario = resultado;
+    });
   }
 
+  public getId_usuario(){
+    return this.id_usuario;
+  }
+
+  public navegar(){
+    this.loginService.navegar(this.id_usuario.id);
+  }
+
+  public logar(){
+    this.router.navigate(['/login']);
+  }
 
 }
