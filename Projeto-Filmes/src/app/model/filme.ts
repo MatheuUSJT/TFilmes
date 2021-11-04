@@ -11,7 +11,7 @@ export class Filme {
   imagem?: File;
 
   //show
-  pais_origem?: string;
+  show_pais?: string;
   show_genero?: string;
 
 }

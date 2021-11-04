@@ -19,7 +19,7 @@ app.listen(process.env.PORT, () => console.log("up and running"));
 const obterFilmes = (req, res) =>{
     db.listar((filmes)=>{
         filmes = filmes.map((f)=>{
-            return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, origem_uf: f.origem_uf, pais_origem: f.pais, sinopse: f.sinopse,
+            return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, origem_uf: f.origem_uf, show_pais: f.pais, sinopse: f.sinopse,
             genero: f.genero, show_genero: f.show_genero}
         });
         res.json({filmes});
@@ -117,6 +117,16 @@ app.delete("/filmes", (req, res) => {
 
 
 //QUERYS COMMENTS
+app.get('/comments/filme/:id', (req, res)=>{
+    const {id} = req.params;
+    dbComments.getFilme(id, filme => {
+        filme = filme.map((f)=>{
+            return{id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, 
+                show_pais: f.show_pais, sinopse: f.sinopse, show_genero: f.show_genero}
+        });
+        res.json({filme});
+    });
+});
 
 app.get("/comments/:id",(req, res) => {
     const {id} = req.params;

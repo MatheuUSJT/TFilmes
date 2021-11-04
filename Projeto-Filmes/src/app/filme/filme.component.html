@@ -8,7 +8,7 @@
           <!--<img [src]="'assets/img/velozes_e_furiosos.jpg'" style="width:300px; height: 500px;" alt="image">-->
           <div class="info-filmes">
             <span> {{filme.data_lancamento}} </span><br>
-            <span> {{filme.pais_origem}} </span><br>
+            <span> {{filme.show_pais}} </span><br>
             <span> {{filme.show_genero}} </span><br>
             <span> {{filme.sinopse}} </span><br>
             <!--Arrumar Imagem por filme-->
@@ -49,7 +49,7 @@
             <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" name="genero" placeholder="{{filme.show_genero}}" ngModel></p-dropdown><br>
             <br>
 
-            <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" name="origem_uf" placeholder="{{filme.pais_origem}}" ngModel></p-dropdown><br>
+            <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" name="origem_uf" placeholder="{{filme.show_pais}}" ngModel></p-dropdown><br>
             <br>
             <br>
 

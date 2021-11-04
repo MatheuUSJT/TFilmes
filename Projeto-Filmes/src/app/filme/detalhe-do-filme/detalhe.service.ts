@@ -10,10 +10,24 @@ import { take } from 'rxjs/internal/operators';
 })
 
 export class DetalheService {
-  private colecaofilmes = new Subject<Filme[]>()
+  private filme: any;
+  private newFilme = new Subject<Filme>();
   private colecaoComments = new Subject<Comments[]>();
 
   constructor(private httpClient: HttpClient) { }
+
+
+  public buscarFilme(id:any){
+    return this.httpClient.get('http://localhost:3000/comments/filme/' + id, {responseType:'json'})/* .subscribe(data =>console.log(data)) */;
+  }
+
+  public async getFilme(id:any){
+
+    this.filme = await this.buscarFilme(id).toPromise().catch((erro) => console.log(erro));
+
+    return this.filme.filme[0];
+  }
+
 
   //GETS, INSERTS AND UPDATES COMENTARIOS
   public getComments(id:any){

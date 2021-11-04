@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/internal/operators';
 import { LoginService } from 'src/app/login/login.service';
+import { Filme } from 'src/app/model/filme';
 import { Comments } from '../../model/comments';
 import { DetalheService } from './detalhe.service';
 
@@ -14,6 +15,7 @@ export class DetalheDoFilmeComponent implements OnInit {
 
   private id_usuario?: number;
   private id_filme!: number;
+  filme: any;
   comments: Comments[]=[];
 
 
@@ -23,6 +25,10 @@ export class DetalheDoFilmeComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.filme = this.detalheService.getFilme(this.id_filme);
+    console.log(this.filme);
+
     //GET COMENTARIOS
     this.detalheService.getCommentsAtualizados().pipe(take(1)).subscribe(comments =>{
       this.comments = comments;

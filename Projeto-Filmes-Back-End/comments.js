@@ -46,7 +46,7 @@ const inserirComentarios = (comment, callback) => {
 const getFilme = (id, callback) => {
     const conexao = obterConexao();
     conexao.query(
-        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', f.origem_uf AS 'origem_uf', p.pais AS 'pais', f.sinopse AS 'sinopse', f.genero AS 'genero',g.descricao AS 'shoq_genero'" +
+        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', concat(p.sigla,' - ', p.pais) AS 'show_pais',  f.sinopse AS 'sinopse', g.descricao AS 'show_genero'" +
         " FROM filme f"+
         " left join paises p on p.codigo = f.origem_uf"+
         " left join genero g on g.codigo = f.genero"+
