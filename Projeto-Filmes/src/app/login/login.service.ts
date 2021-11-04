@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 //import {Subject} from 'rxjs';
 import { Login } from '../model/login';
-import { take } from 'rxjs/internal/operators';
+import { delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,20 @@ export class LoginService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   public buscarLogin(login: Login){
-    this.httpClient.get('http://localhost:3000/login/' + login.email + '/' + login.senha, {responseType:'json'}).pipe(take(1)).subscribe(resultado=>{
-      this.id_recebido = resultado})
+    return this.httpClient.get('http://localhost:3000/login/' + login.email + '/' + login.senha, {responseType:'json'});
+    //console.log(this.id_recebido);
+   /* this.httpClient.get('http://localhost:3000/login/' + login.email + '/' + login.senha, {responseType:'json'}).pipe(take(1)).subscribe(resultado=>{
+      this.id_recebido = resultado}); */
   }
 
-  public retornarId(){
-    return this.id_recebido;
+  public async realizarLogin(login: Login){
+    this.id_recebido = await this.buscarLogin(login).toPromise().catch((erro) => console.log(erro));
+
+    if(this.id_recebido.id){
+      this.navegar(this.id_recebido.id);
+    }else{
+      console.log(this.id_recebido);
+    }
   }
 
   public navegar(id: number){
@@ -36,4 +45,3 @@ export class LoginService {
 
 
 }
-

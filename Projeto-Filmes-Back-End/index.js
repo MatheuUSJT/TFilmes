@@ -145,7 +145,7 @@ app.post("/comentario/cadastrar",(req, res)=>{
 //LOGIN
 app.get("/login/:email/:senha",(req,res)=>{
     
-    if( req.params.email != 'undefined' || req.params.senha != 'undefined' ){
+    if( req.params.email != 'undefined' && req.params.senha != 'undefined' ){
         login = {
             email: req.params.email,
             senha: req.params.senha
@@ -155,9 +155,19 @@ app.get("/login/:email/:senha",(req,res)=>{
         console.log('senha ' + req.params.senha);
     
         dbLogin.validarLogin(login ,Id_usuario =>{
-            var id = Id_usuario[0]["id_usuario"];
-            console.log(id);
-            res.json({id});
+            
+            if(Id_usuario[0]){
+                var id = Id_usuario[0]["id_usuario"];
+                console.log(id);
+                res.json({id});
+                
+            }else{
+                var mgs = 'cadastro inexistente';
+                console.log(mgs);
+                res.json({mgs});
+            }
+
+            
         });
 
     }else{

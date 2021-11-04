@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Login } from '../model/login';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   login: Login = new Login();
   private usuarioAutenticado: number = 0;
 
+
   constructor(private loginService : LoginService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,18 +24,7 @@ export class LoginComponent implements OnInit {
 
   realizarLogin(){
     console.log("realizando login");
-
-    var resposta: any;
-    this.loginService.buscarLogin(this.login);
-    resposta = this.loginService.retornarId();
-
-
-    if(resposta != null){
-      this.usuarioAutenticado = resposta.id;
-      this.loginService.navegar(this.usuarioAutenticado);
-    }else{
-      console.log('informe o login e a senha');
-    }
+    this.loginService.realizarLogin(this.login);
   }
 
 

@@ -15,10 +15,17 @@ export class CadastroService {
   constructor(private httpClient: HttpClient, private router: Router, private loginService: LoginService) {}
 
   public cadastrarUsuario(usuario: Usuario){
-    this.httpClient.post<{id: number}>("http://localhost:3000/cadastro-usuario", usuario)
-    .subscribe(resultado=>{
-      this.id_usuario = resultado;
-    });
+    return this.httpClient.post<{id: number}>("http://localhost:3000/cadastro-usuario", usuario);
+  }
+
+  public async realizarCadastro(usuario: Usuario) {
+    this.id_usuario = await this.cadastrarUsuario(usuario).toPromise().catch((erro) => console.log(erro));
+
+    if(this.id_usuario.id){
+      this.navegar();
+    }else{
+      console.log(this.id_usuario);
+    }
   }
 
   public getId_usuario(){

@@ -28,17 +28,10 @@ export class CadastroUsuarioComponent implements OnInit {
       if(form.value.senha != form.value.confirmaSenha){
         console.log('As senhas não são iguais!');
       }else{
-        this.cadastroService.cadastrarUsuario(u);
+        this.cadastroService.realizarCadastro(u);
       }//CLOSE 2 ELSE
     }//CLOSE 1 ELSE
-    var id = this.cadastroService.getId_usuario();
-    if(typeof id.id === "number"){
-      console.log('tipo number');
-      this.cadastroService.navegar();
-    }else{
-      console.log('tipo string');
-      this.cadastroService.logar();
-    }
+
   }//CLOSE CADASTRAR
 
 }
