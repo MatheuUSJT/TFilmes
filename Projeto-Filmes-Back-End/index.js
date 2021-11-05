@@ -140,12 +140,24 @@ app.get("/comments/:id",(req, res) => {
     });   
 });
 
+const obterComentarios = (req,res)=>{
+    const id = req.body;
+    dbComments.getComments(id.filme, comments =>{
+        comments = comments.map((c)=>{
+            return{id_comentario: c.id_comentario, texto: c.texto, data_lan: c.data_lan,
+                nome_usuario_lan: c.nome_usuario_lan, filme: c.filme}
+        });
+        res.json({comments});
+        
+    });   
+}
+
 app.post("/comentario/cadastrar",(req, res)=>{
     console.log('comentario');
     const comentario = req.body;
-    console.log(comentario);
-    dbComments.inserirComentarios(comentario, resposta =>{
-        console.log({resposta});
+    console.log(comentario.filme);
+    dbComments.inserirComentarios(comentario, (resultado) =>{
+        obterComentarios(req,res);
     });
 });
 

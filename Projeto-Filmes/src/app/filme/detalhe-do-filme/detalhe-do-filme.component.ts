@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/internal/operators';
+import { take } from 'rxjs/operators';
 import { LoginService } from 'src/app/login/login.service';
-import { Filme } from 'src/app/model/filme';
 import { Comments } from '../../model/comments';
 import { DetalheService } from './detalhe.service';
 
@@ -30,7 +29,7 @@ export class DetalheDoFilmeComponent implements OnInit {
     console.log(this.filme);
 
     //GET COMENTARIOS
-    this.detalheService.getCommentsAtualizados().pipe(take(1)).subscribe(comments =>{
+    this.detalheService.getCommentsAtualizados().subscribe(comments =>{
       this.comments = comments;
     });
     this.detalheService.getComments(this.id_filme);
@@ -52,6 +51,8 @@ export class DetalheDoFilmeComponent implements OnInit {
 
       console.log('gravar comentario');
       this.detalheService.inserirComentarios(c);
+
+      console.log(this.comments)
 
     }else{
       console.log('Faça LOGIN para poder comentar.');

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Subject} from 'rxjs';
-import { Filme } from '../../model/filme';
 import { Comments } from '../../model/comments';
-import { take } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +9,7 @@ import { take } from 'rxjs/internal/operators';
 
 export class DetalheService {
   private filme: any;
-  private newFilme = new Subject<Filme>();
-  private colecaoComments = new Subject<Comments[]>();
+  colecaoComments = new Subject<Comments[]>();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,7 +28,7 @@ export class DetalheService {
 
   //GETS, INSERTS AND UPDATES COMENTARIOS
   public getComments(id:any){
-    this.httpClient.get<{comments: Comments[]}>('http://localhost:3000/comments/' + id).pipe(take(1)).subscribe(resultado => {
+    this.httpClient.get<{comments: Comments[]}>('http://localhost:3000/comments/' + id).subscribe(resultado => {
       this.colecaoComments.next(resultado.comments);
     })
   }
@@ -41,8 +38,10 @@ export class DetalheService {
   };
 
   public inserirComentarios(comentario: Comments){
-    this.httpClient.post<{comentario: Comments[]}>("http://localhost:3000/comentario/cadastrar", comentario)
-    .subscribe(resultado=>{console.log(resultado)});
+    this.httpClient.post<{comments: Comments[]}>("http://localhost:3000/comentario/cadastrar", comentario)
+    .subscribe(resultado=>{
+      this.colecaoComments.next(resultado.comments);
+    });
   }
 
 }//ULTIMA CHAVE

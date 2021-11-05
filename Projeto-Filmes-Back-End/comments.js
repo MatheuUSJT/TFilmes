@@ -37,7 +37,7 @@ const inserirComentarios = (comment, callback) => {
         'INSERT INTO comentario(texto,data_lan,usuario_lan,filme) VALUES (?,?,?,?)',
         [comment.texto, dataAtual, comment.usuario_lan, comment.filme],
         (erro, resultado) =>{
-            console.log(resultado);
+            callback(resultado);
         }
     );
 }
