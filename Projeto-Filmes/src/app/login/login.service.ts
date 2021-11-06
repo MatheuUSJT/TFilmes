@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
-//import {Subject} from 'rxjs';
 import { Login } from '../model/login';
-import { delay } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Usuario } from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,11 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class LoginService {
 
+  private usuario = new Usuario();
   private id_usuario?: number;
-  id_recebido: any;
+  logado = new EventEmitter<boolean>();
+  resposta: any;
+
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -25,17 +28,21 @@ export class LoginService {
   }
 
   public async realizarLogin(login: Login){
-    this.id_recebido = await this.buscarLogin(login).toPromise().catch((erro) => console.log(erro));
+    this.resposta = await this.buscarLogin(login).toPromise().catch((erro) => console.log(erro));
 
-    if(this.id_recebido.id){
-      this.navegar(this.id_recebido.id);
+    if(this.resposta.usuario[0]){
+      this.setUsuario(this.resposta.usuario[0]);
+      if(this.usuario.id_usuario){
+        this.navegar(this.usuario.id_usuario);
+      }else{console.log('ID nulo.')}
     }else{
-      console.log(this.id_recebido);
+      console.log(this.resposta);
     }
   }
 
   public navegar(id: number){
     this.id_usuario = id;
+    this.logado.emit(false);
     this.router.navigate(['/']);
   }
 
@@ -43,5 +50,19 @@ export class LoginService {
     return this.id_usuario;
   }
 
+  public getStatusLogin(){
+    return this.logado;
+  }
+
+  public setUsuario(u: Usuario){
+    this.usuario.id_usuario = u.id_usuario;
+    this.usuario.nome = u.nome;
+    this.usuario.email = u.email;
+    this.usuario.perfil = u.perfil;
+  }
+
+  public getUsuario(){
+    return this.usuario;
+  }
 
 }

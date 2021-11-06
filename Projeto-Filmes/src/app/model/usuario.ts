@@ -5,3 +5,4 @@ export class Usuario {
   senha?:string;
   perfil?: number;
 }
+

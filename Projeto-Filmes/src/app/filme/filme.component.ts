@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/internal/operators';
+import { take } from 'rxjs/operators';
 import { Filme } from '../model/filme';
 import { Genero } from '../model/genero';
 import { Pais } from '../model/pais';

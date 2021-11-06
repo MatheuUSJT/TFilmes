@@ -21,6 +21,18 @@ const validarLogin = (login, callback) => {
     );
 };
 
+const infoUsuario = (id, callback) => {
+    const conexao = obterConexao();
+    conexao.query(
+        "select id_usuario, nome, email, perfil from usuario where id_usuario=?",
+        [id],
+        (erro, resultado) => {
+            callback(resultado);
+        }
+    );
+};
+
 module.exports = {
-    validarLogin
+    validarLogin,
+    infoUsuario
 }

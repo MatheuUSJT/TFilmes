@@ -165,6 +165,13 @@ app.post("/comentario/cadastrar",(req, res)=>{
 
 
 //LOGIN
+
+app.get("/login/info/", (req, res) => {
+    res.json(console.log('info'));
+    
+});
+
+
 app.get("/login/:email/:senha",(req,res)=>{
     
     if( req.params.email != 'undefined' && req.params.senha != 'undefined' ){
@@ -172,24 +179,23 @@ app.get("/login/:email/:senha",(req,res)=>{
             email: req.params.email,
             senha: req.params.senha
         }
-
-        console.log('email ' + req.params.email );
-        console.log('senha ' + req.params.senha);
     
+        
         dbLogin.validarLogin(login ,Id_usuario =>{
             
             if(Id_usuario[0]){
                 var id = Id_usuario[0]["id_usuario"];
-                console.log(id);
-                res.json({id});
+
+                dbLogin.infoUsuario(id, usuario =>{
+                    res.json({usuario});
+                });
+
+                //res.json({id});
                 
             }else{
                 var mgs = 'cadastro inexistente';
-                console.log(mgs);
                 res.json({mgs});
-            }
-
-            
+            }            
         });
 
     }else{
@@ -198,6 +204,19 @@ app.get("/login/:email/:senha",(req,res)=>{
     }
 });
 
+
+
+/* app.get("/login/info/:id", (req, res)=>{
+    console.log('infoUsuario');
+    if(req.params.id != 'undefined'){
+        id = req.params.id;
+        dbLogin.infoUsuario(id, response => {
+            console.log(response);
+        });
+    }else{
+        console.log('parametro ID nulo');
+    }
+}); */
 
 app.post("/cadastro-usuario",(req, res)=>{
     const c = req.body;

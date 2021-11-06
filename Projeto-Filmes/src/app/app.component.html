@@ -8,10 +8,9 @@
   <nav>
     <div>
       <a routerLink="">LOGO</a>
-      <a routerLink="/login">Login</a>
       <a routerLink="/cadastro-filme">Cadastrar Filmes</a>
       <a routerLink="">Filmes</a>
-      <a routerLink="/detalhes">Detalhes dos Filmes</a>
+      <a *ngIf="logado" routerLink="/login">Login</a>
     </div>
   </nav>
 
