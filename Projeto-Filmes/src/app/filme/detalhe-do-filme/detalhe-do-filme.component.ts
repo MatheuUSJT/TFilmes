@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { LoginService } from 'src/app/login/login.service';
+import { Usuario } from 'src/app/model/usuario';
 import { Comments } from '../../model/comments';
 import { DetalheService } from './detalhe.service';
 
@@ -12,8 +13,9 @@ import { DetalheService } from './detalhe.service';
 })
 export class DetalheDoFilmeComponent implements OnInit {
 
-  private id_usuario?: number;
+
   private id_filme!: number;
+  usuario = new Usuario();
   filme: any;
   comments: Comments[]=[];
 
@@ -34,7 +36,7 @@ export class DetalheDoFilmeComponent implements OnInit {
     });
     this.detalheService.getComments(this.id_filme);
 
-    this.id_usuario = this.loginService.getId_usuario();
+    this.usuario = this.loginService.getUsuario();
 
     console.log('Tela de Detalhes: ' + this.id_filme);
   }
@@ -42,10 +44,10 @@ export class DetalheDoFilmeComponent implements OnInit {
   comentario: string = '';
   publicarComentario(comentario: any){
     var aux: number = this.id_filme;
-    if(this.id_usuario != null){
+    if(this.usuario.id_usuario != null){
       const c: Comments = {
         texto: comentario,
-        usuario_lan: this.id_usuario,
+        usuario_lan: this.usuario.id_usuario,
         filme: aux
       };
 

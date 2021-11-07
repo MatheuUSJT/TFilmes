@@ -10,7 +10,8 @@ import { LoginService } from '../login.service';
 
 export class CadastroService {
 
-  private id_usuario!: any;
+  private resposta!: any;
+  private usuario = new Usuario();
 
   constructor(private httpClient: HttpClient, private router: Router, private loginService: LoginService) {}
 
@@ -19,21 +20,18 @@ export class CadastroService {
   }
 
   public async realizarCadastro(usuario: Usuario) {
-    this.id_usuario = await this.cadastrarUsuario(usuario).toPromise().catch((erro) => console.log(erro));
+    this.resposta = await this.cadastrarUsuario(usuario).toPromise().catch((erro) => console.log(erro));
 
-    if(this.id_usuario.id){
-      this.navegar();
+    console.log(this.resposta.usuario[0]);
+
+    this.loginService.setUsuario(this.resposta.usuario[0]);
+    this.usuario = this.loginService.getUsuario();
+
+    if(this.usuario.id_usuario){
+      this.loginService.navegar(this.usuario.id_usuario);
     }else{
-      console.log(this.id_usuario);
+      console.log(this.resposta);
     }
-  }
-
-  public getId_usuario(){
-    return this.id_usuario;
-  }
-
-  public navegar(){
-    this.loginService.navegar(this.id_usuario.id);
   }
 
   public logar(){

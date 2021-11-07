@@ -205,19 +205,6 @@ app.get("/login/:email/:senha",(req,res)=>{
 });
 
 
-
-/* app.get("/login/info/:id", (req, res)=>{
-    console.log('infoUsuario');
-    if(req.params.id != 'undefined'){
-        id = req.params.id;
-        dbLogin.infoUsuario(id, response => {
-            console.log(response);
-        });
-    }else{
-        console.log('parametro ID nulo');
-    }
-}); */
-
 app.post("/cadastro-usuario",(req, res)=>{
     const c = req.body;
     var id;
@@ -231,7 +218,9 @@ app.post("/cadastro-usuario",(req, res)=>{
             //CADASTRAR NOVO
             dbCadastro.cadastrarUsuario(c,resp =>{
                 id = resp.insertId;
-                res.json({id});
+                dbLogin.infoUsuario(id, usuario =>{
+                    res.json({usuario});
+                });
             });
         }
 

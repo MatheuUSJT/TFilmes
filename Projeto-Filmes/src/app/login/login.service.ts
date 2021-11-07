@@ -13,7 +13,6 @@ import { Usuario } from '../model/usuario';
 export class LoginService {
 
   private usuario = new Usuario();
-  private id_usuario?: number;
   logado = new EventEmitter<boolean>();
   resposta: any;
 
@@ -41,13 +40,9 @@ export class LoginService {
   }
 
   public navegar(id: number){
-    this.id_usuario = id;
+
     this.logado.emit(false);
     this.router.navigate(['/']);
-  }
-
-  public getId_usuario(){
-    return this.id_usuario;
   }
 
   public getStatusLogin(){
@@ -63,6 +58,11 @@ export class LoginService {
 
   public getUsuario(){
     return this.usuario;
+  }
+
+  public logOut(){
+
+
   }
 
 }
