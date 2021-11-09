@@ -11,6 +11,8 @@ import { Usuario } from './model/usuario';
 export class AppComponent implements OnInit {
 
   logado?: boolean = true;
+  admMaster?: boolean = false;
+  admGeral?: boolean = false;
   usuario: Usuario = new Usuario();
 
   constructor(private loginService: LoginService) {}
@@ -24,8 +26,19 @@ export class AppComponent implements OnInit {
       }
     });
 
+    this.loginService.admMaster.subscribe(resultado => {
+      this.admMaster = resultado;
+    });
+
+    this.loginService.admGeral.subscribe(resultado => {
+      this.admGeral = resultado;
+    })
 
 
+  }
+
+  public sair(){
+    location.reload()
   }
 
 }

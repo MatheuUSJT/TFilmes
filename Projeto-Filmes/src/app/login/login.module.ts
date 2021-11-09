@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from "primeng/button";
 import { InputTextModule } from "primeng/inputtext";
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -23,7 +24,8 @@ import { InputTextModule } from "primeng/inputtext";
     CardModule,
     FormsModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule
   ],
   exports:[],
   declarations:[

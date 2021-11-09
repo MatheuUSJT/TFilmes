@@ -216,6 +216,7 @@ app.post("/cadastro-usuario",(req, res)=>{
             res.json({msg});
         }else{
             //CADASTRAR NOVO
+            console.log(c);
             dbCadastro.cadastrarUsuario(c,resp =>{
                 id = resp.insertId;
                 dbLogin.infoUsuario(id, usuario =>{
@@ -226,3 +227,17 @@ app.post("/cadastro-usuario",(req, res)=>{
 
     });
 });
+
+const obterPerfis = (req, res) =>{
+    dbCadastro.getPerfis((perfis) =>{
+        perfis = perfis.map((p)=>{
+            return {codigo: p.codigo, descricao: p.descricao}
+        });
+        res.json({perfis});
+    });
+    
+}
+
+app.get("/cadastro-usuario/perfis", (req, res) =>{
+    obterPerfis(req, res);
+})

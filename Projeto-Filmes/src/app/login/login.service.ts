@@ -13,6 +13,8 @@ import { Usuario } from '../model/usuario';
 export class LoginService {
 
   private usuario = new Usuario();
+  admMaster = new EventEmitter<boolean>();
+  admGeral = new EventEmitter<boolean>();
   logado = new EventEmitter<boolean>();
   resposta: any;
 
@@ -54,15 +56,35 @@ export class LoginService {
     this.usuario.nome = u.nome;
     this.usuario.email = u.email;
     this.usuario.perfil = u.perfil;
+
+    this.validaPerfil(this.usuario.perfil);
+
+    /* if(this.usuario.perfil === 2){
+      this.admMaster.emit(true);
+    }else{
+      this.admMaster.emit(false);
+    } */
+  }
+
+  public validaPerfil(perfil: any){
+    //if para cadastrar usuarios admMaster
+    if(perfil === 2){
+      this.admMaster.emit(true);
+    }else{
+      this.admMaster.emit(false);
+    }
+
+    //if para cadastrar filmes admGeral
+    if(perfil === 2 || perfil === 3){
+      this.admGeral.emit(true);
+    }else{
+      this.admGeral.emit(false);
+    }
   }
 
   public getUsuario(){
     return this.usuario;
   }
 
-  public logOut(){
-
-
-  }
 
 }

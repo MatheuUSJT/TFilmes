@@ -23,15 +23,26 @@ const validarEmail = (email, callback) => {
 const cadastrarUsuario = (usuario, callback) => {
     const conexao = obterConexao();
     conexao.execute(
-        'INSERT INTO usuario(nome,email,senha) VALUES (?,?,MD5(?))',
-        [usuario.nome, usuario.email, usuario.senha],
+        'INSERT INTO usuario(nome,email,senha,perfil) VALUES (?,?,MD5(?),?)',
+        [usuario.nome, usuario.email, usuario.senha, usuario.perfil],
         (erro, resultado) =>{
             callback(resultado);
         }
     );
 }
 
+const getPerfis = (callback) => {
+    const conexao = obterConexao();
+    conexao.query(
+        'SELECT codigo, descricao FROM perfil',
+        (erro, resultado) => {
+            callback(resultado)
+        }
+    );
+}
+
 module.exports = {
     validarEmail,
-    cadastrarUsuario
+    cadastrarUsuario,
+    getPerfis
 }

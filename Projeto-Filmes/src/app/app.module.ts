@@ -8,9 +8,11 @@ import { TabViewModule } from 'primeng/tabview';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { InputTextModule } from 'primeng/inputtext';
+
 import { InputTextareaModule } from 'primeng/inputtextarea'; */
+
 
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -38,7 +40,7 @@ import { LoginModule } from './login/login.module';
     BrowserModule,
     HttpClientModule,
     FilmeModule,
-    LoginModule,
+    LoginModule
     /* DropdownModule,
     FormsModule,
     BrowserAnimationsModule,

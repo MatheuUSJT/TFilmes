@@ -21,6 +21,11 @@
           <input type="password" pInputText name="confirmaSenha" placeholder="Confirme sua senha" ngModel>
         </span><br>
 
+        <p-dropdown *ngIf="admMaster" [options]="perfis" optionValue="codigo" optionLabel="descricao" placeholder="Selecione o Perfil" name="perfil" ngModel></p-dropdown><br>
+        <br>
+
+
+
         <p-button type="submit">Confirmar</p-button>
       </form>
     </p-card>

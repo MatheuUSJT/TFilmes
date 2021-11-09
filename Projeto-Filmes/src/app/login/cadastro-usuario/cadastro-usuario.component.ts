@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { AppComponent } from 'src/app/app.component';
 import { Usuario } from 'src/app/model/usuario';
+import { LoginService } from '../login.service';
 import { CadastroService } from './cadastro-usuario.service';
 
 
@@ -10,9 +13,24 @@ import { CadastroService } from './cadastro-usuario.service';
 })
 export class CadastroUsuarioComponent implements OnInit {
 
-  constructor(private cadastroService: CadastroService) { }
+  perfis: Perfil[] = [];
+  admMaster?: boolean = false;
+  logado?: boolean = true;
 
-  ngOnInit(): void {
+  constructor(private cadastroService: CadastroService, private loginService: LoginService, private appService: AppComponent) { }
+
+  ngOnInit(){
+
+    this.cadastroService.returnPerfis().subscribe(perfis => {
+      this.perfis = perfis;
+    });
+    this.cadastroService.getPerfil();
+
+
+    this.admMaster = this.appService.admMaster;
+
+    this.logado = this.appService.logado;
+
   }
 
   cadastrar(form: any){
@@ -20,18 +38,33 @@ export class CadastroUsuarioComponent implements OnInit {
     || form.value.confirmaSenha == ''){
       console.log('Preencha todos campos');
     }else{
+      var auxPerfil;
+      if(form.value.perfil == undefined || form.value.perfil == ''){
+        auxPerfil = 1;
+      }else{
+        auxPerfil = form.value.perfil;
+      }
+
       const u: Usuario = {
         nome: form.value.nome,
         email: form.value.email,
-        senha: form.value.senha}
+        senha: form.value.senha,
+        perfil: auxPerfil,
+      }
 
       if(form.value.senha != form.value.confirmaSenha){
         console.log('As senhas não são iguais!');
       }else{
-        this.cadastroService.realizarCadastro(u);
+        console.log(u);
+        this.cadastroService.realizarCadastro(u, this.logado);
       }//CLOSE 2 ELSE
     }//CLOSE 1 ELSE
 
   }//CLOSE CADASTRAR
 
+}
+
+interface Perfil {
+  codigo: number;
+  descricao: string;
 }
