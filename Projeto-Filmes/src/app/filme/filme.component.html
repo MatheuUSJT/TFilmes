@@ -16,7 +16,9 @@
           </div>
           <br>
           <div class="adicionar-botao">
-            <p-button label="Ver Detalhes" icon="pi pi-check" (click)="verDetalheFilme(filme.id_filme)"></p-button>
+            <p-button label="Ver Detalhes" icon="pi pi-check" (click)="verDetalheFilme(filme.id_filme)"></p-button><br>
+            <br>
+            <p-button *ngIf="admGeral" label="Editar Filme" icon="pi pi-check" (click)="editarFilme(filme.id_filme)"></p-button><br>
           </div>
           <br>
         </p-card>
@@ -24,12 +26,12 @@
 
 
      <!-- <img src="..\assets\DBvWkbBbiCizFsue1Q0E-3u1.jpg" style="width:200px">-->
-     <img href="..\..\..\Projeto-Filmes-Back-End\img-filme\y9WgxJ-j838_mwEJ2BhwXjRI.jpg" style="width:200px">
+     <!-- <img href="..\..\..\Projeto-Filmes-Back-End\img-filme\y9WgxJ-j838_mwEJ2BhwXjRI.jpg" style="width:200px"> VALIDAR QUALD OS DOIS ESTA FUNCIONANDO -->
 
     </p-tabPanel><!--Close Movie's View-->
 
 
-    <p-tabPanel header="Movies Editor">
+    <!-- <p-tabPanel header="Movies Editor">
       <div class="EDIT-FILMES" *ngFor="let filme of filmes">
         <p-card>
           <form #editFilmeForm="ngForm">
@@ -58,16 +60,16 @@
             </div>
             <br>
 
-            <!--Botão para excluir Filme-->
+
             <div>
               <p-button class="btn-excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
             </div>
-          </form><!--Close Form-->
+          </form>
           <br>
         </p-card>
         <br>
-      </div><!--Close Let Filmes-->
-    </p-tabPanel><!--Close Movies Editor-->
+      </div>
+    </p-tabPanel> -->
 
     <br>
     <br>

@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { ToggleButtonModule } from "primeng/togglebutton";
+import { EditarFilmeComponent } from "./editar-filme/editar-filme.component";
 
 
 
@@ -39,7 +40,8 @@ import { ToggleButtonModule } from "primeng/togglebutton";
   declarations: [
     FilmeComponent,
     DetalheDoFilmeComponent,
-    CadastroFilmeComponent
+    CadastroFilmeComponent,
+    EditarFilmeComponent
   ],
   providers: [
     FilmeService,

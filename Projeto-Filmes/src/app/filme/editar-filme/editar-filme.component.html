@@ -1,0 +1,37 @@
+<main>
+  <p-tabView>
+    <p-card>
+      <form #editFilmeForm="ngForm">
+        <span class="p-float-label">
+          <input type="text" pInputText name="titulo" placeholder="{{filme.__zone_symbol__value['titulo']}}" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          <input type="date" pInputText name="data_lancamento" placeholder="{{filme.__zone_symbol__value['data_lancamento']}}" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          <input type="text" pInputText name="sinopse" placeholder="{{filme.__zone_symbol__value['sinopse']}}" ngModel>
+        </span><br>
+
+
+        <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" name="genero" placeholder="{{filme.__zone_symbol__value['show_genero']}}" ngModel></p-dropdown><br>
+        <br>
+
+        <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" name="origem_uf" placeholder="{{filme.__zone_symbol__value['show_pais']}}" ngModel></p-dropdown><br>
+        <br>
+        <br>
+
+        <div class="adicionar-botao">
+          <p-button label="Adicionar" (onClick)="atualizar(editFilmeForm, filme)" icon="pi pi-check"></p-button>
+        </div>
+        <br>
+
+        <!--Botão para excluir Filme-->
+        <div>
+          <p-button class="btn-excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
+        </div>
+      </form>
+    </p-card>
+  </p-tabView>
+</main>

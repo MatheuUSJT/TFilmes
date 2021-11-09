@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { AppComponent } from '../app.component';
 import { Filme } from '../model/filme';
 import { Genero } from '../model/genero';
 import { Pais } from '../model/pais';
@@ -14,17 +15,21 @@ import { FilmeService } from './filme.service';
 })
 export class FilmeComponent implements OnInit, OnDestroy {
 
-  constructor(private filmeService: FilmeService, private router: Router){}
+  constructor(private filmeService: FilmeService, private router: Router, private appService: AppComponent){}
 
   filmes: Filme[] = [];
   paises: Pais[] = [];
   paisSelecionado: number = 0;
   generos: Genero[] = [];
   generoSelecionado: number = 0;
+  admGeral?: boolean = false;
 
   unsub$ = new Subject();
 
   ngOnInit(){
+
+    this.admGeral = this.appService.admGeral;
+
     //GET PARA EXIBIÇÃO DE FILMES
     //GET FILMES
     this.filmeService.getColecaoAtualizada().pipe(take(1)).subscribe(filmes =>{
@@ -89,6 +94,10 @@ export class FilmeComponent implements OnInit, OnDestroy {
 
   verDetalheFilme(id_filme:any){
     this.router.navigate(['/detalhe-filme', id_filme]);
+  }
+
+  editarFilme(id_filme:any){
+    this.router.navigate(['/editar-filme', id_filme]);
   }
 
 }
