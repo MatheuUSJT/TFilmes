@@ -54,7 +54,8 @@ export class DetalheDoFilmeComponent implements OnInit {
       console.log('gravar comentario');
       this.detalheService.inserirComentarios(c);
 
-      console.log(this.comments)
+      console.log(this.comments);
+      this.comentario = '';
 
     }else{
       console.log('Faça LOGIN para poder comentar.');
