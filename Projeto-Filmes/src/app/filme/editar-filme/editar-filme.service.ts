@@ -12,7 +12,8 @@ import { Filme } from 'src/app/model/filme';
 export class EditarFilmeService{
 
 
-  private filme: any;
+  private resposta: any;
+  private filme =  new Filme();
   private colecaoPaises = new Subject<Pais[]>();
   private colecaoGeneros = new Subject<Genero[]>();
 
@@ -22,7 +23,8 @@ export class EditarFilmeService{
 
 
   public atualizar(filme: any){
-
+    console.log('aqui')
+    return this.httpClient.put( 'http://localhost:3000/editar-filme', filme).subscribe(resposta => {console.log(resposta)});
   }
 
 
@@ -38,17 +40,30 @@ export class EditarFilmeService{
 
 
   public buscarFilme(id:any){
-    return this.httpClient.get('http://localhost:3000/comments/filme/' + id, {responseType:'json'})/* .subscribe(data =>console.log(data)) */;
+    return this.httpClient.get<{filmes: Filme[]}>('http://localhost:3000/editar-filme/' + id);
+    //return this.httpClient.get('http://localhost:3000/editar-filme/' + id, {responseType:'json'})/* .subscribe(data =>console.log(data)) */;
   }
 
   public async getFilme(id:any){
-
-    this.filme = await this.buscarFilme(id).toPromise().catch((erro) => console.log(erro));
-
-    return this.filme.filme[0];
+    this.resposta = await this.buscarFilme(id).toPromise().catch((erro) => console.log(erro));
+    this.setFilme(this.resposta.filme[0]);
   }
 
 
+  public setFilme(resposta: any){
+    this.filme.id_filme = resposta.id_filme;
+    this.filme.titulo = resposta.titulo;
+    this.filme.data_lancamento = resposta.data_lancamento;
+    this.filme.sinopse = resposta.sinopse;
+    this.filme.origem_uf = resposta.origem_uf;
+    this.filme.show_pais = resposta.show_pais;
+    this.filme.genero = resposta.genero;
+    this.filme.show_genero = resposta.show_genero;
+  }
+
+  public returnFilme(){
+    return this.filme;
+  }
 
 
 

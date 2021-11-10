@@ -14,7 +14,8 @@ import { EditarFilmeService } from './editar-filme.service';
 export class EditarFilmeComponent implements OnInit {
 
   private id_filme: number;
-  filme: any;
+  filmeBack: any;
+  filme = new Filme();
   paises: Pais[] = [];
   generos: Genero[] = [];
 
@@ -22,10 +23,10 @@ export class EditarFilmeComponent implements OnInit {
     this.id_filme = this.route.snapshot.params['id_filme'];
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     //GET INFOS FILME
-    this.filme = this.editarService.getFilme(this.id_filme);
-    console.log(this.id_filme);
+    this.editarService.getFilme(this.id_filme)
+    this.filme = this.editarService.returnFilme();
 
     //GETS PARA UPDATE DE FILME
     //GET PAISES
@@ -39,7 +40,10 @@ export class EditarFilmeComponent implements OnInit {
       this.generos = generos;
     });
     this.editarService.getGeneros();
+
   }
+
+
 
   //NÃO ESTÁ FUNCIONANDO = CORRIGIR
   atualizar (editFilmeForm: any, filme: Filme){
@@ -48,7 +52,7 @@ export class EditarFilmeComponent implements OnInit {
     f.id_filme = filme.id_filme;
 
     if(editFilmeForm.value.titulo === '')
-    {f.titulo = filme.titulo;}
+    {f.titulo = this.filme.titulo;}
       else{f.titulo = editFilmeForm.value.titulo};
 
     if(editFilmeForm.value.data_lancamento === '')

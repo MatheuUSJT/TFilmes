@@ -4,6 +4,7 @@ const db = require('./db');
 const dbComments = require('./comments');
 const dbLogin = require('./login');
 const dbCadastro = require('./cadastrar-usuario');
+const dbEditarFilme = require ('./editar-filme');
 const express = require('express');
 const { json } = require('express');
 const multipart = require('connect-multiparty')
@@ -101,13 +102,22 @@ app.post('/filmes/upload', multipartMiddleware, (req, res)=>{
 
 
 
-
-app.put("/filmes", (req, res) => {
+app.put("/editar-filme", (req, res) => {
     const f = req.body;
-    db.atualizar(f, (resultado) =>{
-        obterFilmes(req, res);
-    });
+    console.log(f);
+    dbEditarFilme.atualizar(f);
 })
+
+app.get('/editar-filme/:id', (req, res)=>{
+    const {id} = req.params;
+    dbEditarFilme.getFilme(id, filme => {
+        filme = filme.map((f)=>{
+            return{id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, 
+                origem_uf: f.origem_uf, show_pais: f.show_pais, sinopse: f.sinopse, genero: f.genero, show_genero: f.show_genero}
+        });
+        res.json({filme});
+    });
+});
 
 app.delete("/filmes", (req, res) => {
     db.excluir(req.body, (resultado)=>{

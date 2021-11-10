@@ -70,17 +70,6 @@ const inserir = (filme, callback) => {
     );
 }
 
-const atualizar = (filme, callback) =>{
-    const conexao = obterConexao();
-    conexao.execute(
-        'UPDATE filme SET titulo=?, data_lancamento=? origem_uf=?, sinopse=?, genero=? WHERE id_filme=?',
-        [filme.titulo, filme.data_lancamento, filme.origem_uf, filme.sinopse, filme.genero, filme.id_filme],
-        (erro, resultado) =>{
-            callback(resultado);
-        }
-    );
-}
-
 const excluir = (filme, callback) => {
     const conexao = obterConexao();
     conexao.execute(
@@ -95,7 +84,6 @@ const excluir = (filme, callback) => {
 module.exports = {
     listar,
     inserir, 
-    atualizar,
     excluir, 
     getPais,
     getGenero
