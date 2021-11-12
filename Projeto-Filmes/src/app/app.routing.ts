@@ -7,6 +7,7 @@ import { LoginComponent } from "./login/login.component";
 import { CadastroUsuarioComponent } from "./login/cadastro-usuario/cadastro-usuario.component";
 import { EditarFilmeComponent } from "./filme/editar-filme/editar-filme.component";
 
+
 const APP_ROUTES: Routes = [
   { path: 'detalhe-filme/:id_filme', component: DetalheDoFilmeComponent},
   { path: 'editar-filme/:id_filme', component: EditarFilmeComponent},
@@ -15,6 +16,7 @@ const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'cadastro-usuario', component: CadastroUsuarioComponent},
   { path: '', component: FilmeComponent}
+
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

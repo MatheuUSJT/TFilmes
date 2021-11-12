@@ -203,8 +203,8 @@ app.get("/login/:email/:senha",(req,res)=>{
                 //res.json({id});
                 
             }else{
-                var mgs = 'cadastro inexistente';
-                res.json({mgs});
+                var msg = 'E-mail ou senha incorreto!';
+                res.json({msg});
             }            
         });
 

@@ -19,6 +19,12 @@ import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { ToggleButtonModule } from "primeng/togglebutton";
 import { EditarFilmeComponent } from "./editar-filme/editar-filme.component";
+import { DialogModule } from 'primeng/dialog';
+import { DataViewModule } from 'primeng/dataview';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+
+
+
 
 
 
@@ -35,6 +41,9 @@ import { EditarFilmeComponent } from "./editar-filme/editar-filme.component";
     InputTextareaModule,
     ButtonModule,
     ToggleButtonModule,
+    DialogModule,
+    DataViewModule,
+    ScrollPanelModule
     ],
   exports: [],
   declarations: [

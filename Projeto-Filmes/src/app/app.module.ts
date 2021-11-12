@@ -16,22 +16,26 @@ import { InputTextareaModule } from 'primeng/inputtextarea'; */
 
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-/* import { FilmeComponent } from './filme/filme.component';
+import { LoginService } from './login/login.service';
+import { FilmeModule } from './filme/filme.module';
+import { LoginModule } from './login/login.module';
+
+/*import { PopUpComponent } from './pop-up/pop-up.component';
+import { FilmeComponent } from './filme/filme.component';
 import { DetalheDoFilmeComponent } from './filme/detalhe-do-filme/detalhe-do-filme.component';
 import { LoginComponent } from './login/login.component';
 import { CadastroUsuarioComponent } from './login/cadastro-usuario/cadastro-usuario.component';
 import { CadastroFilmeComponent } from './filme/cadastro-filme/cadastro-filme.component';
 import { EditarFilmeComponent } from './filme/editar-filme/editar-filme.component';*/
-import { LoginService } from './login/login.service';
-import { FilmeModule } from './filme/filme.module';
-import { LoginModule } from './login/login.module';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-  /*EditarFilmeComponent,
+  /*PopUpComponent,
+    EditarFilmeComponent,
     CadastroUsuarioComponent,
     LoginComponent,
     FilmeComponent,
@@ -43,7 +47,8 @@ import { LoginModule } from './login/login.module';
     BrowserModule,
     HttpClientModule,
     FilmeModule,
-    LoginModule
+    LoginModule,
+
     /* DropdownModule,
     FormsModule,
     BrowserAnimationsModule,

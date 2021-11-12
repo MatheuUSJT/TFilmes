@@ -6,6 +6,8 @@ import { Usuario } from 'src/app/model/usuario';
 import { Comments } from '../../model/comments';
 import { DetalheService } from './detalhe.service';
 
+
+
 @Component({
   selector: 'app-detalhe-do-filme',
   templateUrl: './detalhe-do-filme.component.html',
@@ -18,6 +20,10 @@ export class DetalheDoFilmeComponent implements OnInit {
   usuario = new Usuario();
   filme: any;
   comments: Comments[]=[];
+
+  display: boolean = false;
+  msgDisplay: string = 'Deseja comentar?';
+  confirm: string = 'Sim'
 
 
   constructor(private detalheService: DetalheService,
@@ -57,13 +63,25 @@ export class DetalheDoFilmeComponent implements OnInit {
       console.log(this.comments);
       this.comentario = '';
 
+      this.display = false;
+
     }else{
-      console.log('Faça LOGIN para poder comentar.');
+
+      this.display = false;
     }
+  }
 
-
-
-
+  showDialog(comentario: any) {
+    this.display = true;
+    if(comentario == ''){
+      this.msgDisplay = 'Digite algo para comentar.';
+      this.confirm = 'OK';
+    }else{
+      if(this.usuario.id_usuario == null){
+        this.msgDisplay = 'Faça LOGIN para poder comentar.';
+        this.confirm = 'OK';
+      }
+    }
   }
 
 }

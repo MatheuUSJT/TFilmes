@@ -34,7 +34,7 @@ export class CadastroService {
       this.usuario = this.loginService.getUsuario();
 
       if(this.usuario.id_usuario){
-        this.loginService.navegar(this.usuario.id_usuario);
+        this.loginService.navegar();
       }else{
         console.log(this.resposta);
       }

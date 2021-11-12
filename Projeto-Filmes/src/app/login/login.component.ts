@@ -15,6 +15,10 @@ export class LoginComponent implements OnInit {
   login: Login = new Login();
   private usuarioAutenticado: number = 0;
 
+  display: boolean = false;
+  msgDisplay: any;
+
+
 
   constructor(private loginService : LoginService, private router: Router) { }
 
@@ -22,10 +26,19 @@ export class LoginComponent implements OnInit {
 
   }
 
-  realizarLogin(){
-    console.log("realizando login");
-    this.loginService.realizarLogin(this.login);
+  async realizarLogin(){
+    var resposta;
+    resposta = await this.loginService.realizarLogin(this.login);
+
+    if(resposta != true){
+      this.display = true;
+      this.msgDisplay = resposta;
+    }else{
+      this.loginService.navegar();
+    }
   }
+
+  ok(){this.display = false;}
 
 
   cadastrarUsuario(){

@@ -17,18 +17,19 @@
       <br>
       <br>
       <p-button label="Cadastrar-se" (onClick)="cadastrarUsuario()"></p-button>
-     <!-- <form #formLogin="ngForm" (ngSubmit)="realizarLogin(formLogin)">
-        <span class="p-float-label">
-          <input name="email" type="text" placeholder="Login" pInputText ngModel>
-        </span><br>
-
-        <span class="p-float-label">
-          <input name="senha" type="text" placeholder="Senha" pInputText ngModel>
-        </span><br>
-
-        <p-button label="Realizar Login" type="submit"></p-button>
-      </form>Close Form-->
     </p-card>
+
+
+    <p-dialog [(visible)]="display">
+      <div>
+        {{msgDisplay}}
+        <br>
+        <br>
+        <p-button label="OK" (click)="ok()" icon="pi pi-check"></p-button>
+      </div>
+    </p-dialog>
+
+
 
     <br>
     <br>

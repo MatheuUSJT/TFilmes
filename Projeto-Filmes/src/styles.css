@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+html{background-color:#1e1e1e;}
+main{background-color:#1e1e1e;}
+a{color: #FFD54F;}
+a:hover {color: #FFD54F;text-decoration: none;}
+a:not([href]){color: #FFD54F;text-decoration: none;}
+a:not([href]):hover{color: #FFD54F;text-decoration: none;}
+.infof{display: inline-block;}
+.sinopse{
+  display: inline-block;
+  width: 10rem
+}

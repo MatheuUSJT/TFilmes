@@ -18,6 +18,8 @@ export class LoginService {
   logado = new EventEmitter<boolean>();
   resposta: any;
 
+  msgDisplay: any;
+
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -31,18 +33,21 @@ export class LoginService {
   public async realizarLogin(login: Login){
     this.resposta = await this.buscarLogin(login).toPromise().catch((erro) => console.log(erro));
 
-    if(this.resposta.usuario[0]){
+    if(this.resposta.usuario){
       this.setUsuario(this.resposta.usuario[0]);
-      if(this.usuario.id_usuario){
-        this.navegar(this.usuario.id_usuario);
-      }else{console.log('ID nulo.')}
+      return true;
+      /* if(this.usuario.id_usuario){
+        this.navegar();
+      }else{console.log('ID nulo.')} */
     }else{
+      this.msgDisplay = this.resposta.msg;
       console.log(this.resposta);
+      return this.msgDisplay;
     }
   }
 
-  public navegar(id: number){
-
+  public navegar(){
+    console.log(this.usuario.id_usuario);
     this.logado.emit(false);
     this.router.navigate(['/']);
   }
@@ -58,12 +63,6 @@ export class LoginService {
     this.usuario.perfil = u.perfil;
 
     this.validaPerfil(this.usuario.perfil);
-
-    /* if(this.usuario.perfil === 2){
-      this.admMaster.emit(true);
-    }else{
-      this.admMaster.emit(false);
-    } */
   }
 
   public validaPerfil(perfil: any){

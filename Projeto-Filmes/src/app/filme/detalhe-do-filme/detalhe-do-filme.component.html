@@ -1,4 +1,4 @@
-<main>
+<main style="background-color: #1e1e1e;">
   <p-tabView>
       <p-card>
         <h2>{{filme.__zone_symbol__value['titulo']}}</h2>
@@ -20,14 +20,25 @@
             <br>
             {{comment.texto}}
           </p-card>
+          <br>
         </div><!--Close Let Comentarios-->
         <br>
         <div>Compartilhe sua experiencia também!</div>
         <textarea [rows]="5" [cols]="100" placeholder="Digite algo..." [(ngModel)]="comentario" pInputTextarea></textarea>
         <br>
         <div class="adicionar-botao">
-          <p-button label="Publicar" (onClick)="publicarComentario(comentario)" icon="pi pi-check"></p-button>
+          <p-button type="button" label="Publicar" (click)="showDialog(comentario)" icon="pi pi-check"></p-button>
         </div>
+
+        <p-dialog [(visible)]="display">
+          <div>
+            {{msgDisplay}}
+            <br>
+            <br>
+            <p-button label="{{confirm}}" (click)="publicarComentario(comentario)" icon="pi pi-check"></p-button>
+          </div>
+        </p-dialog>
+
       </p-card>
   </p-tabView>
 </main>

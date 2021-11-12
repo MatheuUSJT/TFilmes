@@ -18,6 +18,7 @@ const listar = (callback) => {
         " left join genero g on g.codigo = f.genero"+
         " where f.ativo = 1",
         (erro, resultado) => {
+            console.log(erro);
             callback(resultado)
         }
     );

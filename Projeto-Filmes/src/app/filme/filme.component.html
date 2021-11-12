@@ -1,18 +1,54 @@
 
 <main>
   <p-tabView>
-    <!--EXIBIÇÃO DE FILMES-->
-    <p-tabPanel header="Movie's View">
+
+    <p-dataView #dv [value]="filmes" filterBy="titulo" layout="grid" [paginator]="true" [rows]="2">
+      <ng-template pTemplate="header">
+        <input type="search" pInputText placeholder="Search by brand" (input)="dv.filter($event.target.value)">
+      </ng-template>
+
+      <ng-template let-filme pTemplate="gridItem">
+        <p-card header="{{filme.titulo}}">
+          <div class="info-filmes">
+            <div class="infof">
+              <p-scrollPanel [style]="{width: '500px', height: '200px'}">
+                <p>{{filme.sinopse}}</p>
+              </p-scrollPanel>
+            </div>
+            <div class="infof">
+              <span> {{filme.data_lancamento}} </span><br>
+              <span> {{filme.show_pais}} </span><br>
+              <span> {{filme.show_genero}} </span><br>
+            </div>
+
+            <div class="adicionar-botao">
+            <p-button label="Ver Detalhes" icon="pi pi-check" (click)="verDetalheFilme(filme.id_filme)"></p-button><br>
+            <br>
+            <p-button *ngIf="admGeral" label="Editar Filme" icon="pi pi-check" (click)="editarFilme(filme.id_filme)"></p-button><br>
+          </div>
+
+          </div>
+        </p-card>
+        <br>
+        <br>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+
+      </ng-template>
+    </p-dataView>
+
+   <!--  <p-tabPanel header="Movie's View">
       <div class="FILMES" *ngFor="let filme of filmes">
         <p-card header="{{filme.titulo}}">
-          <!--<img [src]="'assets/img/velozes_e_furiosos.jpg'" style="width:300px; height: 500px;" alt="image">-->
+          <img [src]="'assets/img/velozes_e_furiosos.jpg'" style="width:300px; height: 500px;" alt="image">
           <div class="info-filmes">
             <span> {{filme.data_lancamento}} </span><br>
             <span> {{filme.show_pais}} </span><br>
             <span> {{filme.show_genero}} </span><br>
             <span> {{filme.sinopse}} </span><br>
-            <!--Arrumar Imagem por filme-->
-            <!--<img style="height:200px; width:150px;" [src]="'assets/img/velozes_e_furiosos.jpg'">-->
+            Arrumar Imagem por filme
+            <img style="height:200px; width:150px;" [src]="'assets/img/velozes_e_furiosos.jpg'">
           </div>
           <br>
           <div class="adicionar-botao">
@@ -22,56 +58,12 @@
           </div>
           <br>
         </p-card>
-      </div><!--Close Let Filmes-->
-
-
-     <!-- <img src="..\assets\DBvWkbBbiCizFsue1Q0E-3u1.jpg" style="width:200px">-->
-     <!-- <img href="..\..\..\Projeto-Filmes-Back-End\img-filme\y9WgxJ-j838_mwEJ2BhwXjRI.jpg" style="width:200px"> VALIDAR QUALD OS DOIS ESTA FUNCIONANDO -->
-
-    </p-tabPanel><!--Close Movie's View-->
-
-
-    <!-- <p-tabPanel header="Movies Editor">
-      <div class="EDIT-FILMES" *ngFor="let filme of filmes">
-        <p-card>
-          <form #editFilmeForm="ngForm">
-            <span class="p-float-label">
-              <input type="text" pInputText name="titulo" placeholder="{{filme.titulo}}" ngModel>
-            </span><br>
-
-            <span class="p-float-label">
-              <input type="date" pInputText name="data_lancamento" placeholder="{{filme.data_lancamento}}" ngModel>
-            </span><br>
-
-            <span class="p-float-label">
-              <input type="text" pInputText name="sinopse" placeholder="{{filme.sinopse}}" ngModel>
-            </span><br>
-
-
-            <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" name="genero" placeholder="{{filme.show_genero}}" ngModel></p-dropdown><br>
-            <br>
-
-            <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" name="origem_uf" placeholder="{{filme.show_pais}}" ngModel></p-dropdown><br>
-            <br>
-            <br>
-
-            <div class="adicionar-botao">
-              <p-button label="Adicionar" (onClick)="atualizar(editFilmeForm, filme)" icon="pi pi-check"></p-button>
-            </div>
-            <br>
-
-
-            <div>
-              <p-button class="btn-excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
-            </div>
-          </form>
-          <br>
-        </p-card>
-        <br>
       </div>
-    </p-tabPanel> -->
 
-    <br>
-    <br>
+
+      <img src="..\assets\DBvWkbBbiCizFsue1Q0E-3u1.jpg" style="width:200px">
+      <img href="..\..\..\Projeto-Filmes-Back-End\img-filme\y9WgxJ-j838_mwEJ2BhwXjRI.jpg" style="width:200px"> VALIDAR QUALD OS DOIS ESTA FUNCIONANDO
+
+    </p-tabPanel> -->
   </p-tabView>
 </main>
