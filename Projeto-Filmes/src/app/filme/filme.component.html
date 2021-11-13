@@ -9,16 +9,29 @@
 
       <ng-template let-filme pTemplate="gridItem">
         <p-card header="{{filme.titulo}}">
-          <div class="info-filmes">
+          <div>
             <div class="infof">
-              <p-scrollPanel [style]="{width: '500px', height: '200px'}">
+              <p-scrollPanel [style]="{width: '400px', height: '200px'}">
                 <p>{{filme.sinopse}}</p>
               </p-scrollPanel>
             </div>
             <div class="infof">
-              <span> {{filme.data_lancamento}} </span><br>
-              <span> {{filme.show_pais}} </span><br>
-              <span> {{filme.show_genero}} </span><br>
+              <div class="data-lan">
+                Data de Lançamento:
+                <p>{{filme.data_lancamento}}</p>
+              </div>
+              <div>
+                Genero:
+                <p>{{filme.show_genero}}</p>
+              </div>
+              <div>
+                Produzido em:
+                <p>{{filme.show_pais}}</p>
+              </div>
+            </div>
+
+            <div class="imgFilme">
+              <img src="{{filme.imagem}}" alt=""style="width:200px">
             </div>
 
             <div class="adicionar-botao">

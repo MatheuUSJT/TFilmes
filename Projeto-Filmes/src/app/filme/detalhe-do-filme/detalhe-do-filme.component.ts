@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { LoginService } from 'src/app/login/login.service';
+import { Filme } from 'src/app/model/filme';
 import { Usuario } from 'src/app/model/usuario';
 import { Comments } from '../../model/comments';
 import { DetalheService } from './detalhe.service';
@@ -18,8 +18,9 @@ export class DetalheDoFilmeComponent implements OnInit {
 
   private id_filme!: number;
   usuario = new Usuario();
-  filme: any;
+  filme = new Filme();
   comments: Comments[]=[];
+
 
   display: boolean = false;
   msgDisplay: string = 'Deseja comentar?';
@@ -28,12 +29,14 @@ export class DetalheDoFilmeComponent implements OnInit {
 
   constructor(private detalheService: DetalheService,
     private loginService: LoginService, private route: ActivatedRoute){
-      this.id_filme = this.route.snapshot.params['id_filme'];}
+      this.id_filme = this.route.snapshot.params['id_filme'];
+    }
 
 
   ngOnInit(): void {
 
-    this.filme = this.detalheService.getFilme(this.id_filme);
+    this.detalheService.getFilme(this.id_filme);
+    this.filme = this.detalheService.returnFilme();
     console.log(this.filme);
 
     //GET COMENTARIOS

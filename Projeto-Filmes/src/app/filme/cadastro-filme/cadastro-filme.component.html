@@ -18,6 +18,36 @@
             <label for="float-input-tarefa">Sinopse</label>
           </span><br>
 
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="direcao" ngModel>
+            <label for="float-input-tarefa">Direção</label>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="roteiro" ngModel>
+            <label for="float-input-tarefa">Roteiro</label>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="elenco" ngModel>
+            <label for="float-input-tarefa">Elenco</label>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="duracao" ngModel>
+            <label for="float-input-tarefa">Duração do Filme</label>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="trailer" ngModel>
+            <label for="float-input-tarefa">Link do Trailer</label>
+          </span><br>
+
+          <span class="p-float-label">
+            <input type="text" id="float-input-tarefa" pInputText name="titulo_original" ngModel>
+            <label for="float-input-tarefa">Titulo original</label>
+          </span><br>
+
           <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" placeholder="Selecione o Gênero do Filme" name="genero" ngModel></p-dropdown><br>
           <br>
           <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" placeholder="Selecione o País de Origem" name="origem_uf" ngModel></p-dropdown><br>
@@ -25,10 +55,11 @@
 
           <div class="container text-center">
             <img [src]="url"  height="200"><br>
+            <br>
+            <br>
             <input type="file" (change)="onChange($event)">
-            <br>
-            <br>
-            <p-button (click)="onUpload()"> Salvar IMG </p-button>
+
+            <!-- <p-button (click)="onUpload()"> Salvar IMG </p-button> -->
           </div>
           <br>
           <br>

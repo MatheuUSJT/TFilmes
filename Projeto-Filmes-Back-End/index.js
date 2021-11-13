@@ -21,7 +21,7 @@ const obterFilmes = (req, res) =>{
     db.listar((filmes)=>{
         filmes = filmes.map((f)=>{
             return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, origem_uf: f.origem_uf, show_pais: f.pais, sinopse: f.sinopse,
-            genero: f.genero, show_genero: f.show_genero}
+                genero: f.genero, show_genero: f.show_genero, imagem: f.imagem, direcao: f.direcao, roteiro: f.roteiro, titulo_original: f.titulo_original, elenco: f.elenco, duracao: f.duracao, trailer: f.trailer, ativo: f.ativo}
         });
         res.json({filmes});
     });
@@ -67,7 +67,13 @@ var Cadastro = {
     origem_uf: 0,
     sinopse: '',
     genero: 0,
-    imagem: ''
+    imagem: '',
+    direcao:'',
+    roteiro:'',
+    elenco:'',
+    duracao:'',
+    trailer:'',
+    titulo_original:''
 }
 //CADASTRO DE FILME
 //INFOS
@@ -75,9 +81,17 @@ app.post("/filmes", (req, res) => {
     const t = req.body;
     Cadastro.titulo = t.titulo;
     Cadastro.data_lancamento = t.data_lancamento;
-    Cadastro.origem_uf = t.origem_uf;
     Cadastro.sinopse = t.sinopse;
+    Cadastro.direcao = t.direcao;
+    Cadastro.roteiro = t.roteiro;
+    Cadastro.elenco = t.elenco;
+    Cadastro.duracao = t.duracao;
+    Cadastro.trailer = t.trailer;
+    Cadastro.titulo_original = t.titulo_original;
     Cadastro.genero = t.genero;
+    Cadastro.origem_uf = t.origem_uf;
+    
+    
     console.log(Cadastro);
     /* db.inserir(t, (resultado) =>{
         obterFilmes(req, res);
@@ -131,8 +145,8 @@ app.get('/comments/filme/:id', (req, res)=>{
     const {id} = req.params;
     dbComments.getFilme(id, filme => {
         filme = filme.map((f)=>{
-            return{id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, 
-                show_pais: f.show_pais, sinopse: f.sinopse, show_genero: f.show_genero}
+            return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, origem_uf: f.origem_uf, show_pais: f.pais, sinopse: f.sinopse,
+                genero: f.genero, show_genero: f.show_genero, imagem: f.imagem, direcao: f.direcao, roteiro: f.roteiro, titulo_original: f.titulo_original, elenco: f.elenco, duracao: f.duracao, trailer: f.trailer, ativo: f.ativo}
         });
         res.json({filme});
     });

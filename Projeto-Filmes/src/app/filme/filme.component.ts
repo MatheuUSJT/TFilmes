@@ -34,6 +34,7 @@ export class FilmeComponent implements OnInit, OnDestroy {
     //GET FILMES
     this.filmeService.getColecaoAtualizada().pipe(take(1)).subscribe(filmes =>{
       this.filmes = filmes;
+      console.log(filmes);
     });
     this.filmeService.list();
 

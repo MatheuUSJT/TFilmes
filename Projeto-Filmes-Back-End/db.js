@@ -12,13 +12,13 @@ const obterConexao = () => {
 const listar = (callback) => {
     const conexao = obterConexao();
     conexao.query(
-        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', f.origem_uf AS 'origem_uf', p.pais AS 'pais', f.sinopse AS 'sinopse', f.genero AS 'genero',g.descricao AS 'show_genero'" +
+        "SELECT f.id_filme AS 'id_filme', f.titulo AS 'titulo', date_format(f.data_lancamento,'%d/%m/%Y') AS 'data_lancamento', f.origem_uf AS 'origem_uf', concat(p.sigla,' - ',p.pais) AS 'pais', f.sinopse AS 'sinopse', f.genero AS 'genero',g.descricao AS 'show_genero'" +
+        ", f.imagem AS 'imagem', f.direcao AS 'direcao', f.roteiro AS 'roteiro', f.titulo_original AS 'titulo_original', f.elenco AS 'elenco', f.duracao AS 'duracao', f.trailer AS 'trailer', f.ativo AS 'ativo'"+
         " FROM filme f"+
         " left join paises p on p.codigo = f.origem_uf"+
         " left join genero g on g.codigo = f.genero"+
         " where f.ativo = 1",
         (erro, resultado) => {
-            console.log(erro);
             callback(resultado)
         }
     );
@@ -63,9 +63,10 @@ const getPais = (callback) => {
 const inserir = (filme, callback) => {
     const conexao = obterConexao();
     conexao.execute(
-        'INSERT INTO filme(titulo,origem_uf,sinopse,genero,data_lancamento,imagem) VALUES (?,?,?,?,?,?)',
-        [filme.titulo, filme.origem_uf, filme.sinopse, filme.genero, filme.data_lancamento, filme.imagem],
+        'INSERT INTO filme(titulo,data_lancamento,sinopse,direcao,roteiro,elenco,duracao,trailer,titulo_original,genero,origem_uf,imagem) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+        [filme.titulo, filme.data_lancamento, filme.sinopse, filme.direcao, filme.roteiro, filme.elenco, filme.duracao, filme.trailer, filme.titulo_original, filme.genero, filme.origem_uf, filme.imagem],
         (erro, resultado) =>{
+            console.log(erro);
             console.log(resultado);
         }
     );

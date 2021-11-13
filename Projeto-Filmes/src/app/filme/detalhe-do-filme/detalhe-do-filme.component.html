@@ -1,15 +1,17 @@
 <main style="background-color: #1e1e1e;">
   <p-tabView>
       <p-card>
-        <h2>{{filme.__zone_symbol__value['titulo']}}</h2>
+        <h2>{{filme.titulo}}</h2>
         <br>
-        <div>Lançado em: {{filme.__zone_symbol__value['data_lancamento']}}</div>
+        <div>Lançado em: {{filme.data_lancamento}}</div>
         <br>
-        <div>Produzido em: {{filme.__zone_symbol__value['show_pais']}}</div>
+        <div>Produzido em: {{filme.show_pais}}</div>
         <br>
-        <div>Gênero: {{filme.__zone_symbol__value['show_genero']}}</div>
+        <div>Gênero: {{filme.show_genero}}</div>
         <br>
-        <div>Sinopse: {{filme.__zone_symbol__value['sinopse']}}</div>
+        <div>Sinopse: {{filme.sinopse}}</div>
+        <br>
+        <iframe width="560" height="315" [src]="filme.trailer | youtube" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <br>
         <br>
         <br>

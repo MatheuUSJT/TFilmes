@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Youtube } from "../../pipes/youtube";
 
 import { FilmeComponent } from "./filme.component";
 import { FilmeService } from "./filme.service";
@@ -50,7 +51,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     FilmeComponent,
     DetalheDoFilmeComponent,
     CadastroFilmeComponent,
-    EditarFilmeComponent
+    EditarFilmeComponent,
+    Youtube
   ],
   providers: [
     FilmeService,

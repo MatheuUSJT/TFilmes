@@ -6,8 +6,17 @@ a{color: #FFD54F;}
 a:hover {color: #FFD54F;text-decoration: none;}
 a:not([href]){color: #FFD54F;text-decoration: none;}
 a:not([href]):hover{color: #FFD54F;text-decoration: none;}
-.infof{display: inline-block;}
+.infof{
+  display: inline-block;
+  width: 400px;
+  height: 200px;
+}
 .sinopse{
   display: inline-block;
   width: 10rem
+}
+
+.imgFilme{
+  display: inline-block;
+  width:200px;
 }

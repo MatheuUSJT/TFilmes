@@ -36,7 +36,6 @@ export class CadastroFilmeComponent implements OnInit {
       this.generos = generos;
     });
     this.filmeService.getGeneros();
-
   }
 
   //CADASTRA O FILME
@@ -44,10 +43,17 @@ export class CadastroFilmeComponent implements OnInit {
     const f: Filme = {
       titulo: filmeForm.value.titulo,
       data_lancamento: filmeForm.value.data_lancamento,
-      origem_uf: filmeForm.value.origem_uf,
       sinopse: filmeForm.value.sinopse,
+      direcao: filmeForm.value.direcao,
+      roteiro: filmeForm.value.roteiro,
+      elenco: filmeForm.value.elenco,
+      duracao: filmeForm.value.duracao,
+      trailer: filmeForm.value.trailer,
+      titulo_original: filmeForm.value.titulo_original,
       genero: filmeForm.value.genero,
-      }
+      origem_uf: filmeForm.value.origem_uf,
+    }
+
     this.filmeService.add(f);
 
 
@@ -74,21 +80,25 @@ export class CadastroFilmeComponent implements OnInit {
         for(let i = 0; i < selectedFiles.length; i++){
           this.files.add(selectedFiles[i]);
         }
-
-        /* var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
+        var reader = new FileReader();
         reader.onload=(event:any)=>{
-          this.url = event.target.result; */
+          this.url = event.target['result'];
         }
+        reader.readAsDataURL(e.target.files[0]);
       }
+    }
 
   onUpload(){
+    console.log('aqui');
     if(this.files && this.files.size > 0 ){
       this.cadastroService.upload(this.files).subscribe(resposta=>{
+
         this.imagemFilme = resposta;
         console.log('UPLOAD REALIZADO')
         console.log(this.imagemFilme)
+
       });
+
     }
   }
 
