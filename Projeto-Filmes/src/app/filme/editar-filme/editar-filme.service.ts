@@ -16,15 +16,18 @@ export class EditarFilmeService{
   private filme =  new Filme();
   private colecaoPaises = new Subject<Pais[]>();
   private colecaoGeneros = new Subject<Genero[]>();
-
+  private alterado: any;
 
   constructor(private httpClient: HttpClient) { }
 
 
 
-  public atualizar(filme: any){
-    console.log('aqui')
-    return this.httpClient.put( 'http://localhost:3000/editar-filme', filme).subscribe(resposta => {console.log(resposta)});
+  public async atualizar(filme: any){
+    this.alterado = await this.httpClient.put( 'http://localhost:3000/editar-filme', filme).toPromise()
+    .catch((erro) => console.log(erro));
+
+    this.alterado = this.alterado.resposta.affectedRows;
+    return this.alterado;
   }
 
 
@@ -59,6 +62,14 @@ export class EditarFilmeService{
     this.filme.show_pais = resposta.show_pais;
     this.filme.genero = resposta.genero;
     this.filme.show_genero = resposta.show_genero;
+    this.filme.imagem = resposta.imagem;
+    this.filme.direcao = resposta.direcao;
+    this.filme.roteiro = resposta.roteiro;
+    this.filme.titulo_original = resposta.titulo_original;
+    this.filme.elenco = resposta.elenco;
+    this.filme.duracao = resposta.duracao;
+    this.filme.trailer = resposta.trailer;
+    this.filme.ativo = resposta.ativo;
   }
 
   public returnFilme(){

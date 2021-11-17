@@ -17,6 +17,36 @@
           <input type="text" pInputText name="sinopse" [value]="filme.sinopse" ngModel>
         </span><br>
 
+        <span class="p-float-label">
+          Direção <br>
+          <input type="text" pInputText name="direcao" [value]="filme.direcao" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          Roteiro <br>
+          <input type="text" pInputText name="roteiro" [value]="filme.roteiro" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          Elenco <br>
+          <input type="text" pInputText name="elenco" [value]="filme.elenco" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          Duração do Filme <br>
+          <input type="text" pInputText name="duracao" [value]="filme.duracao" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          Link do Trailer <br>
+          <input type="text" pInputText name="trailer" [value]="filme.trailer" ngModel>
+        </span><br>
+
+        <span class="p-float-label">
+          Titulo original <br>
+          <input type="text" pInputText name="titulo_original" [value]="filme.titulo_original" ngModel>
+        </span><br>
+
         Genero <br>
         <p-dropdown [options]="generos" optionValue="codigo" optionLabel="descricao" name="genero" placeholder="{{filme.show_genero}}" ngModel></p-dropdown><br>
         <br>
@@ -27,15 +57,25 @@
         <br>
 
         <div class="adicionar-botao">
-          <p-button label="Salvar" (onClick)="atualizar(editFilmeForm, filme)" icon="pi pi-check"></p-button>
+          <p-button label="Salvar" (onClick)="atualizar(editFilmeForm, filme)" icon="pi pi-save"></p-button>
         </div>
         <br>
 
         <!--Botão para excluir Filme-->
         <div>
-          <p-button class="btn-excluir" label="Excluir" (onClick)="excluir(filme)" icon="pi pi-times"></p-button>
+          <p-button class="btn-excluir" label="Excluir" (onClick)="excluir(filme)" icon="pi pi-trash"></p-button>
         </div>
       </form>
     </p-card>
+
+    <p-dialog [(visible)]="display">
+      <div>
+        {{msgDisplay}}
+        <br>
+        <br>
+        <p-button label="OK" (click)="ok()" icon="pi pi-check"></p-button>
+      </div>
+    </p-dialog>
+
   </p-tabView>
 </main>

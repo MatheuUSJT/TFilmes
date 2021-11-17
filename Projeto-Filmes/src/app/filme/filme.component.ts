@@ -23,6 +23,9 @@ export class FilmeComponent implements OnInit, OnDestroy {
   generos: Genero[] = [];
   generoSelecionado: number = 0;
   admGeral?: boolean = false;
+  msgFiltro: String = 'Buscar por título, exemplo: O Poderoso...';
+  filtro: any = 'titulo';
+  filterBy: String = 'titulo';
 
   unsub$ = new Subject();
 
@@ -34,7 +37,6 @@ export class FilmeComponent implements OnInit, OnDestroy {
     //GET FILMES
     this.filmeService.getColecaoAtualizada().pipe(take(1)).subscribe(filmes =>{
       this.filmes = filmes;
-      console.log(filmes);
     });
     this.filmeService.list();
 
@@ -100,5 +102,32 @@ export class FilmeComponent implements OnInit, OnDestroy {
   editarFilme(id_filme:any){
     this.router.navigate(['/editar-filme', id_filme]);
   }
+
+  filtrar(){
+    if(this.filtro == 'titulo'){
+      this.filterBy = 'titulo';
+      this.msgFiltro = 'Buscar por título, exemplo: O Poderoso...';
+    }
+    if(this.filtro == 'data_lancamento'){
+      this.filterBy = 'data_lancamento';
+      this.msgFiltro = 'Buscar por ano do lançamento, exemplo: 1995'
+    }
+    if(this.filtro == 'show_genero'){
+      this.filterBy = 'show_genero';
+      this.msgFiltro = 'Buscar por genero, exemplo: Ação...'
+    }
+    if(this.filtro == 'show_pais'){
+      this.filterBy = 'show_pais';
+      this.msgFiltro = 'Buscar por país que produziu, exemplo: Estados Unidos... '
+    }
+
+  }
+
+  opcoes = [
+    {rotulo: "Título", valor: 'titulo'},
+    {rotulo: "Data de Lançamento", valor: 'data_lancamento'},
+    {rotulo: "Genero", valor: 'show_genero'},
+    {rotulo: "Produzido em", valor: 'show_pais'}
+  ]
 
 }

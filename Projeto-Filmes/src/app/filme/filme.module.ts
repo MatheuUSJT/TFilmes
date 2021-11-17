@@ -23,7 +23,7 @@ import { EditarFilmeComponent } from "./editar-filme/editar-filme.component";
 import { DialogModule } from 'primeng/dialog';
 import { DataViewModule } from 'primeng/dataview';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
-
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 
@@ -44,7 +44,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     ToggleButtonModule,
     DialogModule,
     DataViewModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    SelectButtonModule
     ],
   exports: [],
   declarations: [

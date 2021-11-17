@@ -119,15 +119,17 @@ app.post('/filmes/upload', multipartMiddleware, (req, res)=>{
 app.put("/editar-filme", (req, res) => {
     const f = req.body;
     console.log(f);
-    dbEditarFilme.atualizar(f);
+    dbEditarFilme.atualizar(f, resposta =>{
+        res.json({resposta});
+    });
 })
 
 app.get('/editar-filme/:id', (req, res)=>{
     const {id} = req.params;
     dbEditarFilme.getFilme(id, filme => {
         filme = filme.map((f)=>{
-            return{id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, 
-                origem_uf: f.origem_uf, show_pais: f.show_pais, sinopse: f.sinopse, genero: f.genero, show_genero: f.show_genero}
+            return {id_filme: f.id_filme, titulo: f.titulo, data_lancamento: f.data_lancamento, origem_uf: f.origem_uf, show_pais: f.pais, sinopse: f.sinopse,
+                genero: f.genero, show_genero: f.show_genero, imagem: f.imagem, direcao: f.direcao, roteiro: f.roteiro, titulo_original: f.titulo_original, elenco: f.elenco, duracao: f.duracao, trailer: f.trailer, ativo: f.ativo}
         });
         res.json({filme});
     });

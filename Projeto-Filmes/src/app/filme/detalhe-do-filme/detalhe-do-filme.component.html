@@ -1,21 +1,46 @@
 <main style="background-color: #1e1e1e;">
   <p-tabView>
-      <p-card>
-        <h2>{{filme.titulo}}</h2>
-        <br>
-        <div>Lançado em: {{filme.data_lancamento}}</div>
-        <br>
-        <div>Produzido em: {{filme.show_pais}}</div>
-        <br>
-        <div>Gênero: {{filme.show_genero}}</div>
-        <br>
-        <div>Sinopse: {{filme.sinopse}}</div>
-        <br>
-        <iframe width="560" height="315" [src]="filme.trailer | youtube" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <br>
-        <br>
-        <br>
+      <p-card header="{{filme.titulo}}">
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <img src="{{filme.imagem}}" alt=""style="width:200px">
+            </div>
+            <div class="col-9">
+              <h6>Duração: {{filme.duracao}}
+                / Lançado em: {{filme.data_lancamento}}
+                / Genero: {{filme.show_genero}}</h6> <br>
+              <h6>Direção: {{filme.direcao}}</h6> <br>
+              <h6>Elenco: {{filme.elenco}}</h6><br>
+              <h6>Produzido em: {{filme.show_pais}}</h6> <br>
+              <h6>Titulo Original: {{filme.titulo_original}}</h6>
+            </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-5">
+              <iframe width="560" height="315" [src]="filme.trailer | youtube" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <h5>Sinopse: </h5>
+            <p>{{filme.sinopse}}</p>
+          </div>
+        </div>
+        <br><br>
+
         <h4>Comentários:</h4>
+        <div *ngIf="this.comments.length == []" class="container">
+          <div class="row">
+            <div class="col-5"></div>
+            <div>
+              <h6>Seja o primeiro a comentar!!</h6>
+            </div>
+          </div>
+        </div>
+
         <div class="COMENTARIOS" *ngFor="let comment of comments">
           <p-card>
             {{comment.nome_usuario_lan}}
@@ -25,11 +50,11 @@
           <br>
         </div><!--Close Let Comentarios-->
         <br>
-        <div>Compartilhe sua experiencia também!</div>
-        <textarea [rows]="5" [cols]="100" placeholder="Digite algo..." [(ngModel)]="comentario" pInputTextarea></textarea>
+        <div>Compartilhe sua experiencia!</div>
+        <textarea [rows]="5" [cols]="130" placeholder="Digite algo..." [(ngModel)]="comentario" pInputTextarea></textarea>
         <br>
         <div class="adicionar-botao">
-          <p-button type="button" label="Publicar" (click)="showDialog(comentario)" icon="pi pi-check"></p-button>
+          <p-button type="button" label="Publicar" (click)="showDialog(comentario)" icon="pi pi-send"></p-button>
         </div>
 
         <p-dialog [(visible)]="display">

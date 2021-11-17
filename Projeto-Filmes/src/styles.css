@@ -6,10 +6,9 @@ a{color: #FFD54F;}
 a:hover {color: #FFD54F;text-decoration: none;}
 a:not([href]){color: #FFD54F;text-decoration: none;}
 a:not([href]):hover{color: #FFD54F;text-decoration: none;}
-.infof{
-  display: inline-block;
+.col{
   width: 400px;
-  height: 200px;
+  margin-right: 20px;
 }
 .sinopse{
   display: inline-block;
@@ -19,4 +18,16 @@ a:not([href]):hover{color: #FFD54F;text-decoration: none;}
 .imgFilme{
   display: inline-block;
   width:200px;
+}
+
+.inputFiltro{
+  width:600px;
+}
+
+.theader{
+  display: inline-block;
+}
+
+.infoUsuario{
+  float: right;
 }
