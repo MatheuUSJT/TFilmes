@@ -54,6 +54,23 @@
         Produzido em <br>
         <p-dropdown [options]="paises" optionValue="codigo" optionLabel="pais" name="origem_uf" placeholder="{{filme.show_pais}}" ngModel></p-dropdown><br>
         <br>
+
+        <div class="container"></div>
+          <div class="row">
+            <div class="col">
+              <p>Imagem antiga</p>
+              <img src="{{filme.imagem}}" alt=""style="width:200px">
+            </div>
+            <div class="col">
+                <p>Imagem nova</p>
+                <img [src]="url"  width="200"><br>
+                <br>
+                <br>
+                <input type="file" (change)="onChange($event)" name="imagem" ngModel>
+            </div>
+          </div>
+
+        <br>
         <br>
 
         <div class="adicionar-botao">

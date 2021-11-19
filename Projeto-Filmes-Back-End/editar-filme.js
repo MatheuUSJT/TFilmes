@@ -28,10 +28,10 @@ const getFilme = (id, callback) => {
 const atualizar = (f, callback) =>{
     const conexao = obterConexao();
     conexao.execute(
-        "UPDATE filme SET titulo=?, data_lancamento=?, origem_uf=?, sinopse=?, genero=?, direcao=?, roteiro=?, elenco=?, duracao=?, trailer=?, titulo_original=? WHERE id_filme=?",
-        [f.titulo, f.data_lancamento, f.origem_uf, f.sinopse, f.genero, f.direcao, f.roteiro, f.elenco, f.duracao, f.trailer, f.titulo_original, f.id_filme],
+        "UPDATE filme SET titulo=?, data_lancamento=?, origem_uf=?, sinopse=?, genero=?, direcao=?, roteiro=?, elenco=?, duracao=?, trailer=?, titulo_original=?, imagem=? WHERE id_filme=?",
+        [f.titulo, f.data_lancamento, f.origem_uf, f.sinopse, f.genero, f.direcao, f.roteiro, f.elenco, f.duracao, f.trailer, f.titulo_original, f.imagem, f.id_filme],
         (erro, resultado) =>{
-            callback(resultado);
+            console.log(resultado);
         }
     );
 }

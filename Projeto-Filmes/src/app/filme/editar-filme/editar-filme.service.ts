@@ -30,6 +30,18 @@ export class EditarFilmeService{
     return this.alterado;
   }
 
+  public add(filme: Filme){
+    return this.httpClient.post<{filmes: Filme[]}>('http://localhost:3000/filmes', filme).subscribe(response=>{
+      console.log(response);
+    });
+  }
+
+  public upload(files: Set<File>){
+    const formData = new FormData();
+    files.forEach(file => formData.append('file', file, file.name));
+
+    return this.httpClient.post('http://localhost:3000/editar-filme-comImg', formData);
+  }
 
   //DELETAR FILME
   public deletar(filme: Filme){

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from './login/login.service';
 import { Usuario } from './model/usuario';
 
@@ -15,9 +16,11 @@ export class AppComponent implements OnInit {
   admGeral?: boolean = false;
   usuario: Usuario = new Usuario();
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(){
+    this.router.navigate(['/']);
+
     this.loginService.logado.subscribe(resultado=> {
       this.logado = resultado
       if(this.logado == false){

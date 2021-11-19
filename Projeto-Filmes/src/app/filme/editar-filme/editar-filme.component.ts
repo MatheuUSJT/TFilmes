@@ -16,6 +16,7 @@ export class EditarFilmeComponent implements OnInit {
   private id_filme: number;
   filmeBack: any;
   filme = new Filme();
+  private imagemFilme?: any;
   paises: Pais[] = [];
   generos: Genero[] = [];
 
@@ -99,7 +100,34 @@ export class EditarFilmeComponent implements OnInit {
     {f.genero = filme.genero;}
       else{f.genero = editFilmeForm.value.genero;};
 
-    var aux = await this.editarService.atualizar(f);
+    if(editFilmeForm.value.imagem ==='')
+    {f.imagem = filme.imagem;}
+      else{f.imagem = editFilmeForm.value.imagem;};
+
+
+
+    if(this.files && this.files.size > 0 ){
+      this.display = true;
+      this.msgDisplay = 'Filme atualizado.';
+      this.editarService.add(f);
+      this.editarService.upload(this.files).subscribe(resposta=>{
+        this.imagemFilme = resposta;
+        console.log('UPLOAD REALIZADO')
+        console.log(this.imagemFilme)
+      });
+    }else{
+      var aux = await this.editarService.atualizar(f);
+
+      if(aux > 0){
+        this.display = true;
+        this.msgDisplay = 'Filme atualizado.';
+      }else{
+        this.display = true;
+        this.msgDisplay = 'Erro ao atualizar, tente novamente.'
+      }
+    }
+
+    /* var aux = await this.editarService.atualizar(f);
 
     if(aux > 0){
       this.display = true;
@@ -107,21 +135,38 @@ export class EditarFilmeComponent implements OnInit {
     }else{
       this.display = true;
       this.msgDisplay = 'Erro ao atualizar, tente novamente.'
-    }
-
-
-
+    } */
   }//CLOSE ATUALIZAR
+
+  url:string = ""
+  files: Set<File> = new Set();
+  onChange(e:any){
+    if(e.target.files){
+
+      const selectedFiles = <FileList>e.srcElement.files;
+
+      for(let i = 0; i < selectedFiles.length; i++){
+        this.files.add(selectedFiles[i]);
+      }
+      var reader = new FileReader();
+      reader.onload=(event:any)=>{
+        this.url = event.target['result'];
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
 
 
   excluir(filme: Filme){
     this.editarService.deletar(filme);
+    this.display = true;
+    this.msgDisplay = 'Filme excluído.';
     //AQUI  this.tarefaService.delete(tarefa);
     console.log('sim excluindo');
   }
 
   ok(){
-    if(this.msgDisplay == 'Filme atualizado.'){
+    if(this.msgDisplay == 'Filme atualizado.' || this.msgDisplay == 'Filme excluído.'){
       this.display = false;
       this.router.navigate(['/']);
     }else{

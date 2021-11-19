@@ -73,11 +73,13 @@ var Cadastro = {
     elenco:'',
     duracao:'',
     trailer:'',
-    titulo_original:''
+    titulo_original:'',
+    id_filme:0
 }
 //CADASTRO DE FILME
 //INFOS
 app.post("/filmes", (req, res) => {
+    console.log('aqui add');
     const t = req.body;
     Cadastro.titulo = t.titulo;
     Cadastro.data_lancamento = t.data_lancamento;
@@ -90,7 +92,12 @@ app.post("/filmes", (req, res) => {
     Cadastro.titulo_original = t.titulo_original;
     Cadastro.genero = t.genero;
     Cadastro.origem_uf = t.origem_uf;
-    
+    if(t.imagem){
+        Cadastro.imagem = t.imagem;
+    }
+    if(t.id_filme){
+        Cadastro.id_filme = t.id_filme;
+    }
     
     console.log(Cadastro);
     /* db.inserir(t, (resultado) =>{
@@ -122,7 +129,22 @@ app.put("/editar-filme", (req, res) => {
     dbEditarFilme.atualizar(f, resposta =>{
         res.json({resposta});
     });
-})
+});
+
+var imgEdit;
+const multipartMiddlewareEdit = multipart({ uploadDir: '../Projeto-Filmes/src/assets/imgs'});
+app.post('/editar-filme-comImg', multipartMiddlewareEdit, (req, res)=>{
+    console.log('aqui img')
+    const files = req.files;
+    var strigRetorno = files['file']['path'];
+    imgEdit = '..' + strigRetorno.substring(21);
+    
+    Cadastro.imagem = imgEdit;
+
+    dbEditarFilme.atualizar(Cadastro);
+
+    res.json({strigRetorno});
+});
 
 app.get('/editar-filme/:id', (req, res)=>{
     const {id} = req.params;

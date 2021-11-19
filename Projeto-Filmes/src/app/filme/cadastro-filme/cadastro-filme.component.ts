@@ -60,8 +60,7 @@ export class CadastroFilmeComponent implements OnInit {
     if(this.files && this.files.size > 0 ){
       this.cadastroService.upload(this.files).subscribe(resposta=>{
         this.imagemFilme = resposta;
-        console.log('UPLOAD REALIZADO')
-        console.log(this.imagemFilme)
+        return false;
       });
     }
 
